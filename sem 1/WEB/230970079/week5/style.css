@@ -1,0 +1,67 @@
+body {
+    background-color: lightgray;
+}
+
+.first {
+    background-color: lightblue;
+    color: white;
+
+}
+
+#home {
+    text-align: center;
+    font-size: 35px;
+    padding: 20px 70px;
+}
+
+.navdiv {
+    text-align: right;
+    padding: 20px;
+    font-size: 20px;
+}
+
+.navul {
+    display: flex;
+    padding: 10px;
+    margin: 5px;
+    overflow: hidden;
+}
+
+.navveri {
+    background-color: lightgreen;
+    font-size: 20px;
+    margin-top: 0;
+    padding-bottom: 50%;
+    width: 15vw;
+    padding: 50px;
+    margin: auto;
+    margin-left: 0;
+    margin-right: 100%;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 10%;
+    width: 251px;
+}
+
+li {
+    margin: 10%;
+}
+
+.divp {
+    background-color: lightgrey;
+    max-width: 50%;
+    border: 15px solid rgb(231, 241, 148);
+    padding: 50px;
+    margin: auto;
+}
+
+
+.footercontent {
+    text-align: center;
+    background-color: darkgrey;
+    color: black;
+}
+

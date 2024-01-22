@@ -1,0 +1,114 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+.main-outer-container{
+    height: 100%;
+    width: 50vw;
+    margin: 0px auto;
+
+}
+
+.header h1{
+    color: rgb(43, 126, 252);
+}
+
+.header p{
+    margin-top: 20px;
+}
+
+.header ul{
+    margin-left: 30px;
+    margin-top: 20px;
+}
+
+.form-main-container{
+    margin: 0px auto;
+    margin-top: 50px;
+    width: 50%;
+    height: auto;
+}
+
+.input-container{
+    min-height: 40px;
+    height: auto;
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    justify-content: space-between;
+}
+
+.captcha-container{
+    width: 250px;
+    margin-top: 20px;
+}
+
+.input-container input{
+    width: 200px;
+    height: 25px;
+    padding: 0 5px;
+}
+
+.input-container label{
+    position: relative;
+}
+
+.input-container label::after{
+    position: absolute;
+    content: '*';
+    color: red;
+}
+
+.input-container img{
+    width: 100%;
+    border: 1px solid black;
+    height: 100px;
+    /* margin-top: 50px; */
+}
+
+.radio-main-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-content: space-between;
+    margin: 10px 0;
+}
+
+.radio-main-container:first-child div{
+    width: 200px;
+}
+
+.radio-main-container p{
+    width: 250px;
+}
+
+.select-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-content: space-between;
+}
+
+.select-container select{
+    width: 200px;
+    height: 25px;
+}
+
+.button-container{
+    margin-top: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+}
+
+.button-container input{
+    margin-left: 20px;
+    border: none;
+    padding: 8px 24px;
+    background-color: rgb(26, 44, 202);
+    color: white;
+    cursor: pointer;
+}
+

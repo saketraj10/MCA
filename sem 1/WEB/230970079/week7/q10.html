@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drop down Menu with javascript</title>
+</head>
+<body>
+    <h1>JavaScript Programs</h1>
+
+<div class="dropdown">
+    <select title="select" name="list" id="list" onchange="Click(this.value)">
+        <option value="" hidden selected disabled>Select</option>
+        <option value="box.html">box.html</option>
+        <option value="q9.html">question 9</option>
+        <option value="week3.html">week3</option>
+      </select>
+  </div>
+</div>
+
+<script>
+    function Click(text){
+        open(text);
+    }
+</script>
+    
+</body>
+</html>

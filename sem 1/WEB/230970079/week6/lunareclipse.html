@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lunar exlipse</title>
+    <style>
+        *{
+            background-color: black;
+        }
+        .moon {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background-color: #dcdcdc;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 50px rgba(219, 230, 224, 1);
+        }
+        .planet{
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background-color: black;
+            position: absolute;
+            top: 50%;
+            left: 25%;
+            transform: translate(-50%, -50%);
+            animation: eclipse 10s infinite linear;
+        }
+
+        @keyframes eclipse{
+            from{
+                left:25%;
+            }
+            to{
+                left:100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="moon"></div>
+    <div class="planet"></div>
+</body>
+</html>

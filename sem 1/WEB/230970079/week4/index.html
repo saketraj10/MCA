@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Passport Application | Ministry of External Affairs</title>
+
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+
+  <body>
+    <section class="main-outer-container">
+      <div class="header">
+        <h1>User Registration</h1>
+        <p>
+          <b> Important Information</b>: Passport application can be processed
+          at any PSK/POPSK/PSLK WITHIN INDIA irrespective of your residential
+          address.
+        </p>
+        <ul>
+          <li>
+            <a
+              href="https://portal1.passportindia.gov.in/AppOnlineProject/online/apptAvailStatus"
+              target="_blank"
+            >
+              Click here</a
+            >
+            to check the appointment availability at all PSK/POPSK/PSLK.
+          </li>
+          <li>
+            <a
+              href="https://portal2.passportindia.gov.in/AppOnlineProject/pdf/CIR_0186917_Y.pdf"
+              target="_blank"
+              >Click here</a
+            >
+            to know more about Apply Anywhere in India scheme for Passport
+            Services.
+          </li>
+        </ul>
+      </div>
+
+      <!-- form -container -->
+      <form class="form-main-container">
+        <!-- register to apply -->
+        <div class="radio-main-container">
+          <p>Register to apply at</p>
+          <div class="radio-container">
+            <input type="radio" name="office" id="cpv" />
+            <label for="cpv">CPV</label>
+            <br />
+            <input type="radio" name="office" checked id="passport" />
+            <label for="passport">Passport Office</label>
+          </div>
+        </div>
+
+        <!-- office location -->
+        <div class="select-container">
+          <p>Passport Office</p>
+          <select name="office" id="office" required>
+            <option value="" hidden selected disabled>Select</option>
+            <option value="Manipal">Manipal</option>
+            <option value="Bangalore">Bangalore</option>
+            <option value="Udupi">Udupi</option>
+          </select>
+        </div>
+
+        <!-- given name -->
+        <div class="input-container">
+          <label for="">Given Name</label>
+          <input type="text" required />
+        </div>
+
+        <div class="input-container">
+          <label for="">Surname</label>
+          <input type="text" />
+        </div>
+
+        <div class="input-container">
+          <label for="">Date Of Birth(DD/MM/YYYY)</label>
+          <input type="date" required />
+        </div>
+
+        <div class="input-container">
+          <label for="">E-mail </label>
+          <input type="email" required />
+        </div>
+
+        <div class="input-container">
+          <label for="">Date Of Birth(DD/MM/YYYY)</label>
+          <input type="date" required />
+        </div>
+
+        <div class="radio-main-container">
+          <p>Do you want your Login Id to be same as E-mail Id?</p>
+          <label for="yes">Yes</label>
+          <input type="radio" name="isSame" id="yes" />
+          <label for="no">No</label>
+          <input type="radio" name="isSame" id="no" checked />
+        </div>
+
+        <div class="input-container">
+          <label for="">Login Id</label>
+          <input type="text" required />
+        </div>
+
+        <div class="input-container">
+          <label for="">Password</label>
+          <input type="password" required />
+        </div>
+
+        <div class="input-container">
+          <label for="">Confirm Password</label>
+          <input type="password" required />
+        </div>
+
+        <div class="select-container">
+          <p for="">Hint question</p>
+          <select name="question" id="question">
+            <option value="" hidden selected disabled>Select</option>
+            <option value="">Birth City</option>
+            <option value="">Favourite Color</option>
+            <option value="">Favourite Cricketer</option>
+            <option value="">Favourite Food</option>
+            <option value="">First School</option>
+          </select>
+        </div>
+
+        <div class="input-container">
+          <label for="">Hint Answer</label>
+          <input type="text" required />
+        </div>
+
+        <!-- captcha -->
+        <div class="input-container">
+          <label for="">Enter Characters Displayed</label>
+          <div class="captcha-container">
+            <img src="captcha.jpg" alt="captcha" />
+            <input type="text" required />
+          </div>
+        </div>
+
+        <div class="button-container">
+          <input type="submit" value="Register" />
+          <input type="reset" value="Clear" />
+        </div>
+      </form>
+    </section>
+  </body>
+</html>

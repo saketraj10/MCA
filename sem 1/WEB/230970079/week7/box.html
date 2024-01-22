@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All javascript boxes</title>
+    <style>
+        *{
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <button onclick="alertbox()">Alert Box</button>
+    <button onclick="promptbox()">Prompt Box</button>
+    <button onclick="confirmbox()">Confirm Box</button>
+    <br>
+    <p id="demo"></p>
+    <br>
+    <p id="ptext"></p>
+
+    <script>
+        function alertbox(){
+            alert("Hey, This is Saket website");
+        }
+        
+
+        function promptbox(){
+            var name;
+            var person = window.prompt("Enter your name",);
+            if(person == null || person == ""){
+                name = "User cancelled the prompt";
+            }
+            else{
+                name = "Hello "+ person + "! How are you today?";
+            }
+            document.getElementById("ptext").innerHTML = name;
+        }
+    
+
+        function confirmbox(){
+            var age;
+            if(confirm("Age is above 18")){
+                age = "Your age is above 18 you are eligible for vote";
+            }
+            else{
+                age = "Your age is below 18 you are not eligible for vote";
+            }
+            document.getElementById("demo").innerHTML = age;
+        }
+    </script>
+</body>
+</html>

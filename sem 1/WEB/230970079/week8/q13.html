@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mouse Coordinates on Canvas</title>
+    <style>
+        #canvas {
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+<body>
+    <h1>Mouse Coordinates on Canvas</h1>
+    <canvas id="canvas" width="400" height="400"></canvas>
+    <p>Mouse X: <span id="mouseX">0</span></p>
+    <p>Mouse Y: <span id="mouseY">0</span></p>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const context = canvas.getContext('2d');
+        const mouseXLabel = document.getElementById('mouseX');
+        const mouseYLabel = document.getElementById('mouseY');
+
+        canvas.addEventListener('mousemove', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            mouseXLabel.textContent = x;
+            mouseYLabel.textContent = y;
+        });
+
+        canvas.addEventListener('mouseleave', () => {
+            mouseXLabel.textContent = '0';
+            mouseYLabel.textContent = '0';
+        });
+    </script>
+</body>
+</html>

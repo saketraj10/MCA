@@ -1,0 +1,88 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-size: cover;
+  background-color: aliceblue;
+}
+.first {
+  background-color: lightblue;
+  color: white;
+
+}
+
+#home {
+  text-align: center;
+  font-size: 35px;
+  padding: 20px 70px;
+}
+
+.navdiv {
+  text-align: right;
+  padding: 20px;
+  font-size: 20px;
+}
+
+.row {
+  position: absolute; /* IE10 */
+  display: flex; /* IE10 */
+  flex-wrap: wrap;
+  padding: 0 4px;
+  justify-content: center;
+  background-color: rgba(255, 250, 240, 0.7);
+}
+
+/* Create four equal columns that sits next to each other */
+.column { /* IE10 */
+  flex: 100%;
+  max-width: 100%;
+  /* padding: 0 4px; */
+}
+
+.column img {
+  margin-top: 8px;
+  vertical-align: middle;
+  width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+  .column {
+    flex: 50%;
+    max-width: 50%;
+  }
+}
+@media screen and (min-width: 991px) {
+  .column {
+    flex: 50%;
+    max-width: 50%;
+  }
+}
+@media screen and (min-width: 992px) {
+  .column {
+    flex: 25%;
+    max-width: 25%;
+  }
+}
+
+/* @media (min-width: 992px){
+  .column{
+    flex: 25%;
+    max-width: 25%;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px){
+  .column{
+    flex: 50%;
+    max-width: 50%;
+  }
+}
+
+@media (min-width: 767px){
+  .column{
+    flex: 50%;
+    max-width: 50%;
+  }
+} */
