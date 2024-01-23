@@ -1,0 +1,11 @@
+set serveroutput on
+begin
+	update dept set location='&location' where dno='&dno';
+	if sql%found then
+		dbms_output.put_line('department successfully transffered');
+	end if;
+	if sql%notfound then
+		dbms_output.put_line('department not existing');
+	end if;
+end;
+/

@@ -1,0 +1,144 @@
+SQL> create or replace procedure simple_inst
+  2  (principle in number, rate in number, time in number, si out number) is
+  3  begin
+  4      si := (principle * time * rate)/100;
+  5  end simple_inst;
+  6  /
+
+Procedure created.
+
+SQL> set serveroutput on
+SQL> declare
+  2  v_principle number := &principle;
+  3  v_rate number := &interest_rate;
+  4  v_year number := &year;
+  5  v_si number;
+  6  begin
+  7      simple_inst(v_principle, v_rate, v_year, v_si);
+  8      dbms_output.put_line('Principle amount = ' || v_principle);
+  9      dbms_output.put_line('Rate of interest = ' || v_rate);
+ 10      dbms_output.put_line('Year = ' || v_year);
+ 11      dbms_output.put_line('Simple interest = ' || v_si);
+ 12  end;
+ 13  /
+Enter value for principle: 5600
+old   2: v_principle number := &principle;
+new   2: v_principle number := 5600;
+Enter value for interest_rate: 4
+old   3: v_rate number := &interest_rate;
+new   3: v_rate number := 4;
+Enter value for year: 3
+old   4: v_year number := &year;
+new   4: v_year number := 3;
+Principle amount = 5600                                                         
+Rate of interest = 4                                                            
+Year = 3                                                                        
+Simple interest = 672                                                           
+
+PL/SQL procedure successfully completed.
+
+SQL> set serveroutput on
+SQL> create or replace procedure proc_dept(dept_name in dept.dname%type) is
+  2  cursor proj_handled(d_no dept.dno%type) is select * from emp where deptno = d_no;
+  3  d_no dept.dno%type;
+  4  p_name proj.prj_name%type;
+  5  begin
+  6      select dno into d_no from dept where dname = dept_name;
+  7      for i in proj_handled(d_no) loop
+  8          select prj_name into p_name from proj where dno = d_no;
+  9          dbms_output.put_line(i.ename||'     '||dept_name||'         '||p_name);
+ 10      end loop;
+ 11  end;
+ 12  /
+
+Procedure created.
+
+SQL> execute proc_dept('HR');
+Manu     HR         upi                                                         
+Rajat     HR         upi                                                        
+
+PL/SQL procedure successfully completed.
+
+SQL> create or replace function cal_age(dob in date) return number is
+  2  age number(10,2);
+  3  begin
+  4      age := round((sysdate - dob)/365, 0);
+  5      return (age);
+  6  end;
+  7  /
+
+Function created.
+
+SQL> create or replace function cal_exp(join_date in date) return number is
+  2  exp number(10,2);
+  3  begin
+  4      exp := round((sysdate - join_date)/365, 0);
+  5      return (exp);
+  6  end;
+  7  /
+
+Function created.
+
+SQL> set serveroutput on
+SQL> declare
+  2      v_empno emp.empno%type := &empno;
+  3      v_ename emp.ename%type;
+  4      dob emp.date_birth%type;
+  5      v_date_join emp.date_join%type;
+  6      age number(10,2);
+  7      exp number(10,2);
+  8  begin
+  9      select ename, date_birth, date_join into v_ename, dob, v_date_join from emp where empno = v_empno;
+ 10      age := cal_age(dob);
+ 11      exp := cal_exp(v_date_join);
+ 12      dbms_output.put_line(v_ename||' '||age||' '||exp);
+ 13  end;
+ 14  /
+Enter value for empno: 101
+old   2:     v_empno emp.empno%type := &empno;
+new   2:     v_empno emp.empno%type := 101;
+Ravi 38 22                                                                      
+
+PL/SQL procedure successfully completed.
+
+SQL> create or replace function total_fund(d_no in dept.dno%type) return number is
+  2  fund number := 0;
+  3  begin
+  4      select sum(prj_fund) into fund from proj where dno = d_no;
+  5      if fund < 0 then
+  6          return 0;
+  7      else
+  8          return (fund);
+  9      end if;
+ 10  end;
+ 11  /
+
+Function created.
+
+SQL> set serveroutput on
+SQL> declare
+  2      cursor dept_fund is select dno, dname from dept where dno = dno;
+  3      total number;
+  4  begin
+  5      for i in dept_fund loop
+  6          total := total_fund(i.dno);
+  7          dbms_output.put_line(i.dname||' department has received Rs. '||total||'/-');
+  8      end loop;
+  9  end;
+ 10  /
+Marketing department has received Rs. 900000/-                                  
+Research department has received Rs. 200000/-                                   
+IT department has received Rs. 600000/-                                         
+HR department has received Rs. 700000/-                                         
+Accounts department has received Rs. /-                                         
+Corporate department has received Rs. /-                                        
+Sale department has received Rs. 200000/-                                       
+Develper department has received Rs. 300000/-                                   
+
+PL/SQL procedure successfully completed.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> spool off;

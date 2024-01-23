@@ -1,0 +1,184 @@
+SQL> set serveroutput on
+SQL> declare
+  2  num number(5,0);
+  3  rem number(5,0) := 0;
+  4  sum_of_digit number(5,0) := 0;
+  5  begin
+  6  num := &num;
+  7  while num>0 loop
+  8  	rem := MOD(num,10);
+  9  	num := floor(num / 10);
+ 10  	sum_of_digit := sum_of_digit + rem;
+ 11  	end loop;
+ 12  	dbms_output.put_line('sum of digit ' || sum_of_digit);
+ 13  end;
+ 14  /
+Enter value for num: 954
+old   6: num := &num;
+new   6: num := 954;
+sum of digit 18                                                                 
+
+PL/SQL procedure successfully completed.
+
+SQL> set serveroutput on
+SQL> declare
+  2  str1 varchar(10);
+  3  str2 varchar(1);
+  4  str3 varchar(10);
+  5  begin
+  6  str1 := '&str1';
+  7  
+  8  for i in reverse 1..length(str1) loop
+  9   str2 :=substr(str1,i,1);
+ 10  
+ 11   str3 := str3||str2;
+ 12  end loop;
+ 13  if str3 = str1 then
+ 14  	dbms_output.put_line(str1||' is palindrome');
+ 15  else
+ 16  	dbms_output.put_line(str1||' is not palindrome');
+ 17  end if;
+ 18  end;
+ 19  /
+Enter value for str1: sakas
+old   6: str1 := '&str1';
+new   6: str1 := 'sakas';
+sakas is palindrome                                                             
+
+PL/SQL procedure successfully completed.
+
+SQL> set serveroutput on
+SQL> declare
+  2  str1 varchar(10);
+  3  str2 varchar(1);
+  4  str3 varchar(10);
+  5  begin
+  6  str1 := '&str1';
+  7  
+  8  for i in reverse 1..length(str1) loop
+  9   str2 :=substr(str1,i,1);
+ 10  
+ 11   str3 := str3||str2;
+ 12  end loop;
+ 13  if str3 = str1 then
+ 14  	dbms_output.put_line(str1||' is palindrome');
+ 15  else
+ 16  	dbms_output.put_line(str1||' is not palindrome');
+ 17  end if;
+ 18  end;
+ 19  /
+Enter value for str1: saket
+old   6: str1 := '&str1';
+new   6: str1 := 'saket';
+saket is not palindrome                                                         
+
+PL/SQL procedure successfully completed.
+
+SQL> set serveroutput on
+SQL> declare
+  2  	v_eno emp.empno%type;
+  3  	v_ename emp.ename%type;
+  4  	v_dname dept.dname%type;
+  5  	v_sal emp.sal%type;
+  6  
+  7  begin
+  8  	v_eno :=&eno;
+  9  	select ename,sal, dname into v_ename,v_sal,v_dname from emp e, dept d where e.deptno=d.dno and empno = v_eno;
+ 10  	dbms_output.put_line(v_ename || ' works in ' || v_dname || ' department and draws ' || v_sal || '/- as salary.');
+ 11  end;
+ 12  /
+Enter value for eno: 101
+old   8: 	v_eno :=&eno;
+new   8: 	v_eno :=101;
+Ravi works in Marketing department and draws 32000/- as salary.                 
+
+PL/SQL procedure successfully completed.
+
+SQL> create table empsal(empno number(4), empname varchar(25), sal number(10,2), hra number(10,2), da number(10,2), gross_sal number(10,2), pf number(10,2), net_sal number(10,2));
+
+Table created.
+
+SQL> set serveroutput on
+SQL> declare
+  2  v_empno emp.empno%type;
+  3  v_ename emp.ename%type;
+  4  v_sal emp.sal%type;
+  5  
+  6  v_hra empsal.hra%type;
+  7  v_da empsal.da%type;
+  8  v_pf empsal.pf%type;
+  9  v_gross_sal empsal.gross_sal%type;
+ 10  v_net_sal empsal.net_sal%type;
+ 11  
+ 12  begin
+ 13  v_empno := &empno;
+ 14  
+ 15  select ename, sal into v_ename, v_sal from emp where empno = v_empno;
+ 16  
+ 17  v_hra := .50 * v_sal;
+ 18  v_da := .20 * v_sal;
+ 19  v_pf := .12 * v_sal;
+ 20  v_gross_sal := v_sal + v_hra + v_da;
+ 21  v_net_sal := v_gross_sal - v_pf;
+ 22  
+ 23  insert into empsal values(v_empno, v_ename, v_sal, v_hra, v_da, v_gross_sal, v_pf, v_net_sal);
+ 24  
+ 25  end;
+ 26  /
+Enter value for empno: 101
+old  13: v_empno := &empno;
+new  13: v_empno := 101;
+
+PL/SQL procedure successfully completed.
+
+SQL> select * from empsal;
+
+     EMPNO EMPNAME                          SAL        HRA         DA  GROSS_SAL
+---------- ------------------------- ---------- ---------- ---------- ----------
+        PF    NET_SAL                                                           
+---------- ----------                                                           
+       101 Ravi                           32000      16000       6400      54400
+      3840      50560                                                           
+                                                                                
+
+SQL> create table circle(radius number(4,2), area number(10,2));
+
+Table created.
+
+SQL> set serveroutput on
+SQL> declare
+  2  pi constant number(4,2) := 3.14;
+  3  v_radius circle.radius%type;
+  4  v_area circle.area%type;
+  5  
+  6  begin
+  7  v_radius :=3;
+  8  while v_radius <=7 loop
+  9  
+ 10  v_area := pi * power(v_radius,2);
+ 11  
+ 12  insert into circle values(v_radius, v_area);
+ 13  
+ 14  v_radius := v_radius + 1;
+ 15  
+ 16  end loop;
+ 17  end;
+ 18  /
+
+PL/SQL procedure successfully completed.
+
+SQL> select * from circle;
+
+    RADIUS       AREA                                                           
+---------- ----------                                                           
+         3      28.26                                                           
+         4      50.24                                                           
+         5       78.5                                                           
+         6     113.04                                                           
+         7     153.86                                                           
+
+SQL> commit;
+
+Commit complete.
+
+SQL> spool off;

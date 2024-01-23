@@ -1,0 +1,60 @@
+SQL> @ D:\oraclePrg\230970079\week1\dept.sql;
+create table dept(dno varchar(3) constraint DNO_UNQ_Cons Unique constraint D-LikeDNO_Cons check(dno like 'D%'),
+                                                                *
+ERROR at line 1:
+ORA-02253: constraint specification not allowed here 
+
+
+SQL> @ D:\oraclePrg\230970079\week1\dept.sql;
+
+Table created.
+
+SQL> desc dept
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ DNO                                                VARCHAR2(3)
+ DNAME                                              VARCHAR2(10)
+ LOCATION                                           VARCHAR2(9)
+
+SQL> spool off
+SQL> @ D:\oraclePrg\230970079\week1\emp.sql;
+
+Table created.
+
+SQL> desc emp
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPNO                                     NOT NULL NUMBER(4)
+ ENAME                                              VARCHAR2(10)
+ JOB                                                VARCHAR2(9)
+ MGRID                                              NUMBER(4)
+ DATE_BIRTH                                         DATE
+ SAL                                                NUMBER(7,2)
+ COMM                                               NUMBER(7,2)
+ DEPTNO                                             VARCHAR2(3)
+ DATE_JOIN                                          DATE
+
+SQL> @ D:\oraclePrg\230970079\week1\proj.sql;
+
+Table created.
+
+SQL> desc proj
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ DNO                                       NOT NULL VARCHAR2(3)
+ PRJ_NO                                             VARCHAR2(5)
+ PRJ_NAME                                           VARCHAR2(10)
+ PRJ_CREDIT                                         NUMBER(2)
+ STRT_DATE                                          DATE
+ END_DATE                                           DATE
+
+SQL> commit;
+
+Commit complete.
+
+
+
+
+
+
+SQL> spool off

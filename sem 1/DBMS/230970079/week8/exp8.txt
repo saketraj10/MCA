@@ -1,0 +1,264 @@
+SQL> set serveroutput on
+SQL> declare
+  2  cursor c_emp is select ename, sal from emp where sal > 30000;
+  3  begin
+  4  for i in c_emp
+  5  loop
+  6  	dbms_output.put_line(i.ename ||' draws ' || i.sal || ' as salary ');
+  7  end loop;
+  8  end;
+  9  /
+Ravi draws 32000 as salary                                                      
+Raghu draws 45000 as salary                                                     
+Saket draws 60000 as salary                                                     
+Sachin draws 36000 as salary                                                    
+Mahesh draws 35000 as salary                                                    
+Raj draws 35000 as salary                                                       
+
+PL/SQL procedure successfully completed.
+
+SQL> set serveroutput on;
+SQL> declare
+  2  	par_job emp.job%type := '&job';
+  3  	par_deptno emp.deptno%type := '&deptno';
+  4  cursor c_emp (par_job varchar, par_deptno varchar) is select empno, ename, job, deptno from emp where job = par_job and deptno = par_deptno;
+  5  begin
+  6  	for i in c_emp(par_job, par_deptno) loop
+  7  	dbms_output.put_line(i.empno ||' '||i.ename||' '||i.job||' '||i.deptno);
+  8  	end loop;
+  9  end;
+ 10  /
+Enter value for job: MGR
+old   2: 	par_job emp.job%type := '&job';
+new   2: 	par_job emp.job%type := 'MGR';
+Enter value for deptno: D1
+old   3: 	par_deptno emp.deptno%type := '&deptno';
+new   3: 	par_deptno emp.deptno%type := 'D1';
+101 Ravi MGR D1                                                                 
+
+PL/SQL procedure successfully completed.
+
+SQL> set serveroutput on
+SQL> declare
+  2  	par_prj_id emp.prj_id%type := '&prj_id';
+  3  
+  4  	cursor c_emp_prj(par_prj_id varchar) is select e.ename, e.sal, d.dname from emp e join dept d on e.deptno = d.dno where e.prj_id = par_prj_id order by e.sal desc fetch first 2 rows only;
+  5  begin
+  6  	for i in c_emp_prj(par_prj_id) loop
+  7  	dbms_output.put_line(i.ename||' '||i.sal||' '||i.dname);
+  8  	end loop;
+  9  end;
+ 10  /
+Enter value for prj_id: P1
+old   2: 	par_prj_id emp.prj_id%type := '&prj_id';
+new   2: 	par_prj_id emp.prj_id%type := 'P1';
+Saket 60000 Marketing                                                           
+Raghu 45000 Research                                                            
+
+PL/SQL procedure successfully completed.
+
+
+SQL> select * from dept;
+
+DNO DNAME      LOCATION  DEPT_BUDGET                                            
+--- ---------- --------- -----------                                            
+D1  Marketing  CHN            500000                                            
+D2  Research   MNG            300000                                            
+D3  IT         BNG            400000                                            
+D4  HR         BNG            200000                                            
+D5  Accounts   BNG            500000                                            
+D6  Corporate  HYD            700000                                            
+D7  Sale       BNG            500000                                            
+D8  Develper   HYD            500000                                            
+
+8 rows selected.
+
+SQL> select * from emp;
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP  
+---------- ---------- --------- ---------- --------- ---------- ---------- ---  
+DATE_JOIN PRJ_I                                                                 
+--------- -----                                                                 
+       101 Ravi       MGR              111 10-OCT-85      32000      13200 D1   
+02-OCT-01 P1                                                                    
+                                                                                
+       102 Raviraj    CLRK             106 10-DEC-85      25000      10400 D1   
+12-NOV-00 P3                                                                    
+                                                                                
+       111 Raghu      GM               150 10-DEC-74      45000      19500 D2   
+03-DEC-85 P1                                                                    
+                                                                                
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP  
+---------- ---------- --------- ---------- --------- ---------- ---------- ---  
+DATE_JOIN PRJ_I                                                                 
+--------- -----                                                                 
+       150 Saket      CEO                  10-DEC-70      60000      26000 D1   
+03-DEC-90 P1                                                                    
+                                                                                
+       103 Raj        CLRK             111 10-DEC-80      21000       7100 D1   
+02-OCT-01 P1                                                                    
+                                                                                
+       133 Suraj      CLRK             111 02-OCT-80      25000       5500 D1   
+02-OCT-02 P3                                                                    
+                                                                                
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP  
+---------- ---------- --------- ---------- --------- ---------- ---------- ---  
+DATE_JOIN PRJ_I                                                                 
+--------- -----                                                                 
+       125 Manu       A.MGR            150 10-DEC-80      30000       9000 D4   
+02-OCT-02 P2                                                                    
+                                                                                
+       104 Rohan      CLRK             125 02-OCT-80      26000       7600 D2   
+02-OCT-05 P1                                                                    
+                                                                                
+       106 Sachin     MGR              111 02-OCT-86      36000      13600 D2   
+02-OCT-00 P1                                                                    
+                                                                                
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP  
+---------- ---------- --------- ---------- --------- ---------- ---------- ---  
+DATE_JOIN PRJ_I                                                                 
+--------- -----                                                                 
+       123 Mahesh     MGR              111 10-DEC-74      35000      13500 D3   
+02-OCT-02 P2                                                                    
+                                                                                
+       108 Rajat      CLRK             106 10-DEC-70      23000       6300 D4   
+02-OCT-85 P2                                                                    
+                                                                                
+       109 Arya       CLRK             111 10-DEC-80      26000       5600 D7   
+02-OCT-01 P4                                                                    
+                                                                                
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP  
+---------- ---------- --------- ---------- --------- ---------- ---------- ---  
+DATE_JOIN PRJ_I                                                                 
+--------- -----                                                                 
+       115 Amit       CLRK             106 10-APR-00      21000            D7   
+10-DEC-04 P4                                                                    
+                                                                                
+       116 Raj        MGR              150 10-APR-00      35000      13500 D8   
+19-JAN-05 P5                                                                    
+                                                                                
+       117 Sahil      CLRK             116 04-FEB-82      55000            D1   
+16-JAN-00 P1                                                                    
+                                                                                
+
+15 rows selected.
+
+
+SQL> set serveroutput on
+SQL> declare
+  2  	cursor c_proj is select dno, prj_no, prj_credit, prj_fund from proj;
+  3  	alloc number;
+  4  	alloc_per_emp number(20,2);
+  5  	total_emp number(10);
+  6  begin
+  7  	for i in c_proj loop
+  8  		alloc := (i.prj_credit * 10/100) * i.prj_fund;
+  9  		update dept set dept_budget = dept_budget + ((30/100)*alloc) where dno = i.dno;
+ 10  
+ 11  		alloc_per_emp := (70/100) * alloc;
+ 12  		select count(*) into total_emp from emp where prj_id = i.prj_no and deptno = i.dno;
+ 13  		update emp set sal=sal+(alloc_per_emp/total_emp) where prj_id=i.prj_no and deptno =i.dno;
+ 14  	end loop;
+ 15  end;
+ 16  /
+
+PL/SQL procedure successfully completed.
+
+SQL> select * from dept;
+
+DNO DNAME      LOCATION  DEPT_BUDGET                                            
+--- ---------- --------- -----------                                            
+D1  Marketing  CHN            623000                                            
+D2  Research   MNG            336000                                            
+D3  IT         BNG            440500                                            
+D4  HR         BNG            347000                                            
+D5  Accounts   BNG            500000                                            
+D6  Corporate  HYD            700000                                            
+D7  Sale       BNG            512000                                            
+D8  Develper   HYD            527000                                            
+
+8 rows selected.
+
+SQL> select * from emp;
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP  
+---------- ---------- --------- ---------- --------- ---------- ---------- ---  
+DATE_JOIN PRJ_I                                                                 
+--------- -----                                                                 
+       101 Ravi       MGR              111 10-OCT-85      60000      13200 D1   
+02-OCT-01 P1                                                                    
+                                                                                
+       102 Raviraj    CLRK             106 10-DEC-85     112500      10400 D1   
+12-NOV-00 P3                                                                    
+                                                                                
+       111 Raghu      GM               150 10-DEC-74      73000      19500 D2   
+03-DEC-85 P1                                                                    
+                                                                                
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP  
+---------- ---------- --------- ---------- --------- ---------- ---------- ---  
+DATE_JOIN PRJ_I                                                                 
+--------- -----                                                                 
+       150 Saket      CEO                  10-DEC-70      88000      26000 D1   
+03-DEC-90 P1                                                                    
+                                                                                
+       103 Raj        CLRK             111 10-DEC-80      49000       7100 D1   
+02-OCT-01 P1                                                                    
+                                                                                
+       133 Suraj      CLRK             111 02-OCT-80     112500       5500 D1   
+02-OCT-02 P3                                                                    
+                                                                                
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP  
+---------- ---------- --------- ---------- --------- ---------- ---------- ---  
+DATE_JOIN PRJ_I                                                                 
+--------- -----                                                                 
+       125 Manu       A.MGR            150 10-DEC-80     201500       9000 D4   
+02-OCT-02 P2                                                                    
+                                                                                
+       104 Rohan      CLRK             125 02-OCT-80      54000       7600 D2   
+02-OCT-05 P1                                                                    
+                                                                                
+       106 Sachin     MGR              111 02-OCT-86      64000      13600 D2   
+02-OCT-00 P1                                                                    
+                                                                                
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP  
+---------- ---------- --------- ---------- --------- ---------- ---------- ---  
+DATE_JOIN PRJ_I                                                                 
+--------- -----                                                                 
+       123 Mahesh     MGR              111 10-DEC-74     129500      13500 D3   
+02-OCT-02 P2                                                                    
+                                                                                
+       108 Rajat      CLRK             106 10-DEC-70     194500       6300 D4   
+02-OCT-85 P2                                                                    
+                                                                                
+       109 Arya       CLRK             111 10-DEC-80      40000       5600 D7   
+02-OCT-01 P4                                                                    
+                                                                                
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP  
+---------- ---------- --------- ---------- --------- ---------- ---------- ---  
+DATE_JOIN PRJ_I                                                                 
+--------- -----                                                                 
+       115 Amit       CLRK             106 10-APR-00      35000            D7   
+10-DEC-04 P4                                                                    
+                                                                                
+       116 Raj        MGR              150 10-APR-00      98000      13500 D8   
+19-JAN-05 P5                                                                    
+                                                                                
+       117 Sahil      CLRK             116 04-FEB-82      83000            D1   
+16-JAN-00 P1                                                                    
+                                                                                
+
+15 rows selected.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> spool off;

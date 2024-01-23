@@ -1,0 +1,69 @@
+10.1)
+
+create table sal_mod(empno number(4), dname varchar(10), old_sal number(10,2), mod_date date, modifier varchar(30));
+
+
+set serveroutput on
+create or replace trigger sal_up after update of sal on emp for each row
+declare
+    dept_name dept.dname%type;
+begin
+    select dname into dept_name from dept where dno = :old.deptno;
+
+    if updating ('sal') then
+        insert into sal_mod values(:old.empno, dept_name, :old.sal, sysdate, user);
+    end if;
+end;
+/
+
+update emp set sal = 35000 where empno = 116;
+
+select * from sal_mod;
+
+10.2)
+
+select * from proj;
+
+select * from dept;
+
+set serveroutput on
+create or replace trigger trig1 after update on proj for each row
+declare
+    proj_duration number(10);
+    laspsed_duration number(10);
+    fund number(10);
+begin
+    proj_duration := :old.end_date - :old.strt_date;
+    laspsed_duration := sysdate - :old.strt_date;
+    if laspsed_duration < (0.5 * proj_duration) then
+        fund := (:new.prj_fund - :old.prj_fund)*0.7;
+        dbms_output.put_line('you are eligible for Rs. ' || fund);
+    else
+        fund := (:new.prj_fund - :old.prj_fund) * 0.4;
+        dbms_output.put_line('you are eligible for Rs. ' || fund);
+    end if;
+end;
+/
+
+
+update proj set prj_fund = prj_fund + 150000 where dno = 'D3';
+
+select * from proj;
+
+select * from dept;
+
+
+10.3)
+
+set serveroutput on
+create or replace trigger trig before insert or update or delete on emp for each row
+begin
+    if inserting or updating or deleting then
+        if to_char(sysdate, 'DY') = 'SUN' or to_char(sysdate,'DY') = 'SAT' then
+            raise_application_error(-20111,'No change can be made');
+        end if;
+    end if;
+end;
+/
+
+update emp set sal = 35000 where empno = 116;

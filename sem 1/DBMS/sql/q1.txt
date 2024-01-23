@@ -1,0 +1,19 @@
+select ename from emp where mgrid = (select empno
+										from emp where ename='Raghu');
+										
+select e.ename from emp e , emp m where e.mgrid = m.empno and m.ename = 'Raghu';
+
+select e.ename from emp e join emp m on e.mgrid = m.empno where m.ename = 'Raghu';
+
+select dname from dept where dno = (select deptno from emp where prj_id = 'P1'
+group by deptno having count(empno) >=(select max(count(empno))from emp where prj_id='P1'
+group by deptno));
+
+or 
+
+select d.dname, d.dno from
+ dept d join emp e on d.dno = e.deptno
+ join proj p on d.dno = p.dno
+ where prj_id='P1'
+ group by d.dno
+ having count(empno) >= (select max(count(empno)) from emp where prj_id='P1' group by deptno);

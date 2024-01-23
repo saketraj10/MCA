@@ -1,0 +1,214 @@
+SQL> create table sal_mod(empno number(4), dname varchar(10), old_sal number(10,2), mod_date date, modifier varchar(30));
+
+Table created.
+
+SQL> set serveroutput on
+SQL> create or replace trigger sal_up after update of sal on emp for each row
+  2  declare
+  3      dept_name dept.dname%type;
+  4  begin
+  5      select dname into dept_name from dept where dno = :old.deptno;
+  6
+  7      if updating ('sal') then
+  8          insert into sal_mod values(:old.empno, dept_name, :old.sal, sysdate, user);
+  9      end if;
+ 10  end;
+ 11  /
+
+Trigger created.
+
+SQL> select * from emp;
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP
+---------- ---------- --------- ---------- --------- ---------- ---------- ---
+DATE_JOIN PRJ_I
+--------- -----
+       101 Ravi       MGR              111 10-OCT-85      60000      13200 D1
+02-OCT-01 P1
+
+       102 Raviraj    CLRK             106 10-DEC-85     112500      10400 D1
+12-NOV-00 P3
+
+       111 Raghu      GM               150 10-DEC-74      73000      19500 D2
+03-DEC-85 P1
+
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP
+---------- ---------- --------- ---------- --------- ---------- ---------- ---
+DATE_JOIN PRJ_I
+--------- -----
+       150 Saket      CEO                  10-DEC-70      88000      26000 D1
+03-DEC-90 P1
+
+       103 Raj        CLRK             111 10-DEC-80      49000       7100 D1
+02-OCT-01 P1
+
+       133 Suraj      CLRK             111 02-OCT-80     112500       5500 D1
+02-OCT-02 P3
+
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP
+---------- ---------- --------- ---------- --------- ---------- ---------- ---
+DATE_JOIN PRJ_I
+--------- -----
+       125 Manu       A.MGR            150 10-DEC-80     201500       9000 D4
+02-OCT-02 P2
+
+       104 Rohan      CLRK             125 02-OCT-80      54000       7600 D2
+02-OCT-05 P1
+
+       106 Sachin     MGR              111 02-OCT-86      64000      13600 D2
+02-OCT-00 P1
+
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP
+---------- ---------- --------- ---------- --------- ---------- ---------- ---
+DATE_JOIN PRJ_I
+--------- -----
+       123 Mahesh     MGR              111 10-DEC-74     129500      13500 D3
+02-OCT-02 P2
+
+       108 Rajat      CLRK             106 10-DEC-70     194500       6300 D4
+02-OCT-85 P2
+
+       109 Arya       CLRK             111 10-DEC-80      40000       5600 D7
+02-OCT-01 P4
+
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP
+---------- ---------- --------- ---------- --------- ---------- ---------- ---
+DATE_JOIN PRJ_I
+--------- -----
+       115 Amit       CLRK             106 10-APR-00      35000
+  D7
+10-DEC-04 P4
+
+       116 Raj        MGR              150 10-APR-00      98000      13500 D8
+19-JAN-05 P5
+
+       117 Sahil      CLRK             116 04-FEB-82      83000
+  D1
+16-JAN-00 P1
+
+
+15 rows selected.
+
+SQL> update emp set sal = 35000 where empno = 117;
+
+1 row updated.
+
+SQL> select * from sal_mod;
+
+     EMPNO DNAME         OLD_SAL MOD_DATE  MODIFIER
+---------- ---------- ---------- --------- ------------------------------
+       117 Marketing       83000 04-NOV-23 MCA180
+
+SQL> select * from proj;
+
+DNO PRJ_N PRJ_NAME   PRJ_CREDIT STRT_DATE END_DATE    PRJ_FUND
+--- ----- ---------- ---------- --------- --------- ----------
+D1  P1    bank                4 10-JAN-20 14-DEC-20     400000
+D2  P1    atm                 6 15-JAN-20 16-JUL-20     200000
+D3  P2    insurance           3 30-MAR-20 23-AUG-22     450000
+D1  P3    credit              5 22-JUL-20 28-AUG-20     500000
+D4  P2    upi                 7 29-AUG-20 23-AUG-22     700000
+D7  P4    loan                2 12-APR-20 19-OCT-20     200000
+D8  P5    ios app             3 15-MAR-20 19-NOV-20     300000
+
+7 rows selected.
+
+SQL> select * from dept;
+
+DNO DNAME      LOCATION  DEPT_BUDGET
+--- ---------- --------- -----------
+D1  Marketing  CHN            623000
+D2  Research   MNG            336000
+D3  IT         BNG            440500
+D4  HR         BNG            347000
+D5  Accounts   BNG            500000
+D6  Corporate  HYD            700000
+D7  Sale       BNG            512000
+D8  Develper   HYD            527000
+
+8 rows selected.
+
+SQL> set serveroutput on
+SQL> create or replace trigger trig1 after update on proj for each row
+  2  declare
+  3      proj_duration number(10);
+  4      laspsed_duration number(10);
+  5      fund number(10);
+  6  begin
+  7      proj_duration := :old.end_date - :old.strt_date;
+  8      laspsed_duration := sysdate - :old.strt_date;
+  9      if laspsed_duration < (0.5 * proj_duration) then
+ 10          fund := (:new.prj_fund - :old.prj_fund)*0.7;
+ 11          dbms_output.put_line('you are eligible for Rs. ' || fund);
+ 12      else
+ 13          fund := (:new.prj_fund - :old.prj_fund) * 0.4;
+ 14          dbms_output.put_line('you are eligible for Rs. ' || fund);
+ 15      end if;
+ 16  end;
+ 17  /
+
+Trigger created.
+
+SQL> update proj set prj_fund = prj_fund + 150000 where dno = 'D3';
+you are eligible for Rs. 60000
+
+1 row updated.
+
+SQL> select * from proj;
+
+DNO PRJ_N PRJ_NAME   PRJ_CREDIT STRT_DATE END_DATE    PRJ_FUND
+--- ----- ---------- ---------- --------- --------- ----------
+D1  P1    bank                4 10-JAN-20 14-DEC-20     400000
+D2  P1    atm                 6 15-JAN-20 16-JUL-20     200000
+D3  P2    insurance           3 30-MAR-20 23-AUG-22     600000
+D1  P3    credit              5 22-JUL-20 28-AUG-20     500000
+D4  P2    upi                 7 29-AUG-20 23-AUG-22     700000
+D7  P4    loan                2 12-APR-20 19-OCT-20     200000
+D8  P5    ios app             3 15-MAR-20 19-NOV-20     300000
+
+7 rows selected.
+
+SQL> select * from dept;
+
+DNO DNAME      LOCATION  DEPT_BUDGET
+--- ---------- --------- -----------
+D1  Marketing  CHN            623000
+D2  Research   MNG            336000
+D3  IT         BNG            440500
+D4  HR         BNG            347000
+D5  Accounts   BNG            500000
+D6  Corporate  HYD            700000
+D7  Sale       BNG            512000
+D8  Develper   HYD            527000
+
+8 rows selected.
+
+SQL> set serveroutput on
+SQL> create or replace trigger trig before insert or update or delete on emp for each row
+  2  begin
+  3      if inserting or updating or deleting then
+  4          if to_char(sysdate, 'DY') = 'SUN' or to_char(sysdate,'DY') = 'SAT' then
+  5              raise_application_error(-20111,'No change can be made');
+  6          end if;
+  7      end if;
+  8  end;
+  9  /
+
+Trigger created.
+
+SQL> update emp set sal = 35000 where empno = 116;
+update emp set sal = 35000 where empno = 116
+       *
+ERROR at line 1:
+ORA-20111: No change can be made
+ORA-06512: at "MCA180.TRIG", line 4
+ORA-04088: error during execution of trigger 'MCA180.TRIG'
+
+
+SQL> commit;
+
+Commit complete.

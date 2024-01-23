@@ -1,0 +1,58 @@
+create table docter(docid varchar(10) Primary key check(docid like 'D%'),
+dname varchar(30),
+confees number check(confees>=300 and confees<=1000),
+department varchar(10) check(department in ('Ortho','OBG','Surgery')));
+
+
+create table admission(ward varchar(20) Primary key,
+rent_per_day number(10),
+other_exp number(10),
+room_avail number(10),
+status char(2) check(status in('A','NA')));
+
+create table patient(ip_no number(10) Primary key,
+pname varchar(30),
+date_of_birth date,
+date_of_adm date,
+date_of_discharge date,
+ward varchar(20) references admission,
+gender char(1) check(gender in ('M','F')),
+doctid varchar(10) references docter,
+check(date_of_discharge > date_of_adm));
+
+
+insert into docter values('D001','Avinash',800,'Ortho');
+insert into docter values('D002','Thomas',650,'Surgery');
+insert into docter values('D003','Shyamala',750,'OBG');
+insert into docter values('D004','Madhura',450,'Surgery');
+insert into docter values('D005','Avanthika',650,'OBG');
+insert into docter values('D007','Murali',700,'Surgery');
+
+
+insert into admission values('General',300,0,0,'NA');
+insert into admission values('SemiPrivate',600,100,2,'A');
+insert into admission values('SemiSpecial',1200,200,0,'NA');
+insert into admission values('Special',2400,500,5,'A');
+
+
+insert into patient values(11001,'Ravi',to_date('12-11-1980','DD-MM-YYYY'),to_date('12-10-2018','DD-MM-YYYY'),
+to_date('21-10-2018','DD-MM-YYYY'),'General','M','D001');
+insert into patient values(11002,'Manohar',to_date('09-12-1977','DD-MM-YYYY'),to_date('11-11-2018','DD-MM-YYYY'),
+to_date('14-11-2018','DD-MM-YYYY'),'SemiPrivate','M','D002');
+insert into patient values(11003,'Seema',to_date('02-03-1965','DD-MM-YYYY'),to_date('02-11-2018','DD-MM-YYYY'),
+to_date('10-11-2018','DD-MM-YYYY'),'General','F','D003');
+insert into patient values(11004,'Anju',to_date('03-04-1988','DD-MM-YYYY'),to_date('30-10-2018','DD-MM-YYYY'),
+to_date('01-11-2018','DD-MM-YYYY'),'SemiSpecial','F','D005');
+insert into patient values(11005,'Shekar',to_date('14-11-2000','DD-MM-YYYY'),to_date('21-10-2018','DD-MM-YYYY'),
+to_date('30-10-2018','DD-MM-YYYY'),'Special','M','D002');
+insert into patient values(11006,'Neena',to_date('03-10-1976','DD-MM-YYYY'),to_date('03-11-2018','DD-MM-YYYY'),
+to_date('05-10-2018','DD-MM-YYYY'),'General','F','D003'); this last one is not inserted because of check condition in admission
+
+
+select pname, months_between(sysdate,date_of_birth)/12 as age from patient where gender='F';
+
+select p.pname, p.ward, d.dname from patient p join docter d on p.doctid=d.docid and (date_of_discharge-date_of_adm)>=7;
+
+select pname from patient where doctid in (select docid from docter where confees > (select max(confees) from docter where department='Surgery'));
+ 
+select p.pname from patient p join docter d on p.doctid=d.docid where d.confees > (select max(confees) from docter where department ='Surgery');

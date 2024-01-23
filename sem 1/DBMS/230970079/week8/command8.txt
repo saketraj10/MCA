@@ -1,0 +1,67 @@
+8.1)
+set serveroutput on
+declare
+cursor c_emp is select ename, sal from emp where sal > 30000;
+begin
+for i in c_emp
+loop
+	dbms_output.put_line(i.ename ||' draws ' || i.sal || ' as salary ');
+end loop;
+end;
+/ 
+
+8.2)
+
+alter table emp modify(sal number(10,2));
+
+set serveroutput on
+declare
+	cursor c_proj is select dno, prj_no, prj_credit, prj_fund from proj;
+	alloc number;
+	alloc_per_emp number(20,2);
+	total_emp number(10);
+begin
+	for i in c_proj loop
+		alloc := (i.prj_credit * 10/100) * i.prj_fund;
+		update dept set dept_budget = dept_budget + ((30/100)*alloc) where dno = i.dno;
+		
+		alloc_per_emp := (70/100) * alloc;
+		select count(*) into total_emp from emp where prj_id = i.prj_no and deptno = i.dno;
+		update emp set sal=sal+(alloc_per_emp/total_emp) where prj_id=i.prj_no and deptno =i.dno;
+	end loop;
+end;
+/
+
+
+
+8.3)
+
+
+set serveroutput on;
+declare
+	par_job emp.job%type := '&job';
+	par_deptno emp.deptno%type := '&deptno';
+cursor c_emp (par_job varchar, par_deptno varchar) is select empno, ename, job, deptno from emp where job = par_job and deptno = par_deptno;
+begin
+	for i in c_emp(par_job, par_deptno) loop
+	dbms_output.put_line(i.empno ||' '||i.ename||' '||i.job||' '||i.deptno);
+	end loop;
+end;
+/
+
+
+8.4)
+
+set serveroutput on
+declare
+	par_prj_id emp.prj_id%type := '&prj_id';
+
+	cursor c_emp_prj(par_prj_id varchar) is select e.ename, e.sal, d.dname from emp e join dept d on e.deptno = d.dno where e.prj_id = par_prj_id order by e.sal desc fetch first 2 rows only;
+begin
+	for i in c_emp_prj(par_prj_id) loop
+	dbms_output.put_line(i.ename||' '||i.sal||' '||i.dname);
+	end loop;
+end;
+/
+
+

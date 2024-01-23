@@ -1,0 +1,77 @@
+SQL> insert into student values('&ID', '&Name', '&dept_name',&tot_cred);
+Enter value for id: 1010
+Enter value for name: anu
+Enter value for dept_name: comp
+Enter value for tot_cred: 44
+old   1: insert into student values('&ID', '&Name', '&dept_name',&tot_cred)
+new   1: insert into student values('1010', 'anu', 'comp',44)
+
+1 row created.
+
+SQL> /
+Enter value for id: 1011
+Enter value for name: raju
+Enter value for dept_name: sci
+Enter value for tot_cred: 32
+old   1: insert into student values('&ID', '&Name', '&dept_name',&tot_cred)
+new   1: insert into student values('1011', 'raju', 'sci',32)
+
+1 row created.
+
+SQL> spool off;
+SQL> insert all
+  2  into student values('1006', 'Ajith', 'Info.Sc', 36)
+  3  into student values('1007', 'Aakanksha', 'Data.Sc',26);
+into student values('1007', 'Aakanksha', 'Data.Sc',26)
+                                                     *
+ERROR at line 3:
+ORA-00928: missing SELECT keyword 
+
+
+SQL> insert all
+  2  into student values('1006', 'Ajith', 'Info.Sc', 36)
+  3  into student values('1007', 'Aakanksha', 'Data.Sc',26)
+  4  select * from dual;
+
+2 rows created.
+
+SQL> spool off;
+SQL> @ D:\oraclePrg\230970079\stud_ins.sql
+
+1 row created.
+
+
+1 row created.
+
+SQL> spool off;
+SQL> select * from student;
+
+ID    NAME                 DEPT_NAME              TOT_CRED                      
+----- -------------------- -------------------- ----------                      
+1001  Rajesh               Comp.Sc                      30                      
+1002  Raj                  Physics                      35                      
+1003  Saket                Computer                     46                      
+1004  Raj                  physics                      78                      
+1005  sandeep              maths                        56                      
+1006  Ajith                Info.Sc                      36                      
+1007  Aakanksha            Data.Sc                      26                      
+1006  Raj                  Comp.Sc                      30                      
+1007  Ravi                                              25                      
+1010  anu                  comp                         44                      
+1011  raju                 sci                          32                      
+
+ID    NAME                 DEPT_NAME              TOT_CRED                      
+----- -------------------- -------------------- ----------                      
+1006  Ajith                Info.Sc                      36                      
+1007  Aakanksha            Data.Sc                      26                      
+1006  Raj                  Comp.Sc                      30                      
+1007  Ravi                                              25                      
+
+15 rows selected.
+
+SQL> spool off;
+SQL> commit;
+
+Commit complete.
+
+SQL> spool off;

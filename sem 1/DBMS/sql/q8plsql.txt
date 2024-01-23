@@ -1,0 +1,14 @@
+set serveroutput on
+declare
+	v_empno emp.empno%type;
+	v_ename emp.ename%type;
+	v_sal emp.sal%type;
+begin
+	v_empno:=&empno;
+	select ename, sal into v_ename,v_sal from emp where empno=v_empno;
+	dbms_output.put_line(v_ename||' draws '||v_sal||' as salary');
+exception
+	when no_data_found then
+	dbms_output.put_line('no such employee found');
+end;
+/

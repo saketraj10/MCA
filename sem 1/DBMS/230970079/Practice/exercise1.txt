@@ -1,0 +1,205 @@
+SQL> create table tdept (dno varchar(3) Primary Key, dname varchar(15), Zone varchar(10));
+
+Table created.
+
+SQL> create table temp (empcode number(3) Primary Key, name varchar(15), salary number(7,1), deptno varchar(3) references tdept);
+
+Table created.
+
+SQL> desc tdept
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ DNO                                       NOT NULL VARCHAR2(3)
+ DNAME                                              VARCHAR2(15)
+ ZONE                                               VARCHAR2(10)
+
+SQL> desc temp
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPCODE                                   NOT NULL NUMBER(3)
+ NAME                                               VARCHAR2(15)
+ SALARY                                             NUMBER(7,1)
+ DEPTNO                                             VARCHAR2(3)
+
+SQL> insert into tdept values('&dno', '&dname', '&zone');
+Enter value for dno: D1
+Enter value for dname: Operations
+Enter value for zone: North
+old   1: insert into tdept values('&dno', '&dname', '&zone')
+new   1: insert into tdept values('D1', 'Operations', 'North')
+
+1 row created.
+
+SQL> /
+Enter value for dno: D2
+Enter value for dname: Finance
+Enter value for zone: West
+old   1: insert into tdept values('&dno', '&dname', '&zone')
+new   1: insert into tdept values('D2', 'Finance', 'West')
+
+1 row created.
+
+SQL> /
+Enter value for dno: D3
+Enter value for dname: Sales
+Enter value for zone: South
+old   1: insert into tdept values('&dno', '&dname', '&zone')
+new   1: insert into tdept values('D3', 'Sales', 'South')
+
+1 row created.
+
+SQL> /
+Enter value for dno: D5
+Enter value for dname: Human Resourse
+Enter value for zone: West
+old   1: insert into tdept values('&dno', '&dname', '&zone')
+new   1: insert into tdept values('D5', 'Human Resourse', 'West')
+
+1 row created.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select * from tdept;
+
+DNO DNAME           ZONE                                                        
+--- --------------- ----------                                                  
+D1  Operations      North                                                       
+D2  Finance         West                                                        
+D3  Sales           South                                                       
+D5  Human Resourse  West                                                        
+
+SQL> insert into tdept values('&empcode', '&name', '&deptno', &salary);
+Enter value for empcode: 100
+Enter value for name: Rajesh
+Enter value for deptno: D1
+Enter value for salary: 100000
+old   1: insert into tdept values('&empcode', '&name', '&deptno', &salary)
+new   1: insert into tdept values('100', 'Rajesh', 'D1', 100000)
+insert into tdept values('100', 'Rajesh', 'D1', 100000)
+            *
+ERROR at line 1:
+ORA-00913: too many values 
+
+
+SQL> insert into temp values('&empcode', '&name', '&deptno', &salary);
+Enter value for empcode: 100
+Enter value for name: Rajesh
+Enter value for deptno: D1
+Enter value for salary: 100000
+old   1: insert into temp values('&empcode', '&name', '&deptno', &salary)
+new   1: insert into temp values('100', 'Rajesh', 'D1', 100000)
+insert into temp values('100', 'Rajesh', 'D1', 100000)
+                                         *
+ERROR at line 1:
+ORA-01722: invalid number 
+
+
+SQL> insert into temp values('&empcode', '&name', '&salary', '&deptno');
+Enter value for empcode: 1000
+Enter value for name: Rajesh
+Enter value for salary: 100000
+Enter value for deptno: D1
+old   1: insert into temp values('&empcode', '&name', '&salary', '&deptno')
+new   1: insert into temp values('1000', 'Rajesh', '100000', 'D1')
+insert into temp values('1000', 'Rajesh', '100000', 'D1')
+                        *
+ERROR at line 1:
+ORA-01438: value larger than specified precision allowed for this column 
+
+
+SQL> insert into temp values('&empcode', '&name', '&salary', '&deptno');
+Enter value for empcode: 100
+Enter value for name: Rajesh
+Enter value for salary: 100000
+Enter value for deptno: D1
+old   1: insert into temp values('&empcode', '&name', '&salary', '&deptno')
+new   1: insert into temp values('100', 'Rajesh', '100000', 'D1')
+
+1 row created.
+
+SQL> /
+Enter value for empcode: 101
+Enter value for name: Ravi
+Enter value for salary: D2
+Enter value for deptno: 120000
+old   1: insert into temp values('&empcode', '&name', '&salary', '&deptno')
+new   1: insert into temp values('101', 'Ravi', 'D2', '120000')
+insert into temp values('101', 'Ravi', 'D2', '120000')
+                                       *
+ERROR at line 1:
+ORA-01722: invalid number 
+
+
+SQL> /
+Enter value for empcode: 101
+Enter value for name: Ravi
+Enter value for salary: 120000
+Enter value for deptno: D2
+old   1: insert into temp values('&empcode', '&name', '&salary', '&deptno')
+new   1: insert into temp values('101', 'Ravi', '120000', 'D2')
+
+1 row created.
+
+SQL> /
+Enter value for empcode: 102
+Enter value for name: Vijay
+Enter value for salary: 100000
+Enter value for deptno: D1
+old   1: insert into temp values('&empcode', '&name', '&salary', '&deptno')
+new   1: insert into temp values('102', 'Vijay', '100000', 'D1')
+
+1 row created.
+
+SQL> /
+Enter value for empcode: 108
+Enter value for name: Ajay
+Enter value for salary: 140000
+Enter value for deptno: d3
+old   1: insert into temp values('&empcode', '&name', '&salary', '&deptno')
+new   1: insert into temp values('108', 'Ajay', '140000', 'd3')
+insert into temp values('108', 'Ajay', '140000', 'd3')
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (MCA180.SYS_C0059732) violated - parent key not 
+found 
+
+
+SQL> /
+Enter value for empcode: 108
+Enter value for name: Ajay
+Enter value for salary: 140000
+Enter value for deptno: D3
+old   1: insert into temp values('&empcode', '&name', '&salary', '&deptno')
+new   1: insert into temp values('108', 'Ajay', '140000', 'D3')
+
+1 row created.
+
+SQL> /
+Enter value for empcode: 110
+Enter value for name: Bhaskar
+Enter value for salary: 120000
+Enter value for deptno: D2
+old   1: insert into temp values('&empcode', '&name', '&salary', '&deptno')
+new   1: insert into temp values('110', 'Bhaskar', '120000', 'D2')
+
+1 row created.
+
+SQL> commit
+  2  
+SQL> commit;
+
+Commit complete.
+
+SQL> select * from temp;
+
+   EMPCODE NAME                SALARY DEP                                       
+---------- --------------- ---------- ---                                       
+       100 Rajesh              100000 D1                                        
+       101 Ravi                120000 D2                                        
+       102 Vijay               100000 D1                                        
+       108 Ajay                140000 D3                                        
+       110 Bhaskar             120000 D2                                        
+
+SQL> spool off;

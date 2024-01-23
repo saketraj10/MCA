@@ -1,0 +1,118 @@
+7.1)
+set serveroutput on
+declare
+num number(5,0);
+rem number(5,0) := 0;
+sum_of_digit number(5,0) := 0;
+begin
+num := &num;
+while num>0 loop
+	rem := MOD(num,10);
+	num := floor(num / 10);
+	sum_of_digit := sum_of_digit + rem;
+	end loop;
+	dbms_output.put_line('sum of digit ' || sum_of_digit);
+end;
+/
+
+7.2)
+
+set serveroutput on
+declare
+str1 varchar(10);
+str2 varchar(1);
+str3 varchar(10);
+begin
+str1 := '&str1';
+
+for i in reverse 1..length(str1) loop
+ str2 :=substr(str1,i,1);
+
+ str3 := str3||str2;
+end loop;
+if str3 = str1 then
+	dbms_output.put_line(str1||' is palindrome');
+else
+	dbms_output.put_line(str1||' is not palindrome');
+end if;
+end;
+/
+
+
+7.3)
+
+set serveroutput on
+declare
+	v_eno emp.empno%type;
+	v_ename emp.ename%type;
+	v_dname dept.dname%type;
+	v_sal emp.sal%type;
+	
+begin
+	v_eno :=&eno;
+	select ename,sal, dname into v_ename,v_sal,v_dname from emp e, dept d where e.deptno=d.dno and empno = v_eno;
+	dbms_output.put_line(v_ename || ' works in ' || v_dname || ' department and draws ' || v_sal || '/- as salary.');
+end;
+/
+
+7.4)
+
+create table empsal(empno number(4), empname varchar(25), sal number(10,2), hra number(10,2), da number(10,2), gross_sal number(10,2), pf number(10,2), net_sal number(10,2));
+
+set serveroutput on
+declare
+v_empno emp.empno%type;
+v_ename emp.ename%type;
+v_sal emp.sal%type;
+
+v_hra empsal.hra%type;
+v_da empsal.da%type;
+v_pf empsal.pf%type;
+v_gross_sal empsal.gross_sal%type;
+v_net_sal empsal.net_sal%type;
+
+begin
+v_empno := &empno;
+
+select ename, sal into v_ename, v_sal from emp where empno = v_empno;
+
+v_hra := .50 * v_sal;
+v_da := .20 * v_sal;
+v_pf := .12 * v_sal;
+v_gross_sal := v_sal + v_hra + v_da;
+v_net_sal := v_gross_sal - v_pf;
+
+insert into empsal values(v_empno, v_ename, v_sal, v_hra, v_da, v_gross_sal, v_pf, v_net_sal);
+
+end;
+/
+
+select * from empsal;
+
+7.5)
+
+create table circle(radius number(4,2), area number(10,2));
+
+
+set serveroutput on
+declare
+pi constant number(4,2) := 3.14;
+v_radius circle.radius%type;
+v_area circle.area%type;
+
+begin
+v_radius :=3;
+while v_radius <=7 loop
+
+v_area := pi * power(v_radius,2);
+
+insert into circle values(v_radius, v_area);
+
+v_radius := v_radius + 1;
+
+end loop;
+end;
+/
+
+
+select * from circle;

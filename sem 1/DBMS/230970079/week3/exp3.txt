@@ -1,0 +1,1390 @@
+SQL> insert into dept values('&dno', '&dname', '&location', &dept_budget);
+Enter value for dno: D1
+Enter value for dname: Marketing
+Enter value for location: CHN
+Enter value for dept_budget: 500000
+old   1: insert into dept values('&dno', '&dname', '&location', &dept_budget)
+new   1: insert into dept values('D1', 'Marketing', 'CHN', 500000)
+
+1 row created.
+
+SQL> /
+Enter value for dno: D2
+Enter value for dname: Research
+Enter value for location: MNG
+Enter value for dept_budget: 300000
+old   1: insert into dept values('&dno', '&dname', '&location', &dept_budget)
+new   1: insert into dept values('D2', 'Research', 'MNG', 300000)
+
+1 row created.
+
+SQL> /
+Enter value for dno: D3
+Enter value for dname: IT
+Enter value for location: BNG
+Enter value for dept_budget: 400000
+old   1: insert into dept values('&dno', '&dname', '&location', &dept_budget)
+new   1: insert into dept values('D3', 'IT', 'BNG', 400000)
+
+1 row created.
+
+SQL> /
+Enter value for dno: D4
+Enter value for dname: HR
+Enter value for location: BGG
+Enter value for dept_budget: 200000
+old   1: insert into dept values('&dno', '&dname', '&location', &dept_budget)
+new   1: insert into dept values('D4', 'HR', 'BGG', 200000)
+insert into dept values('D4', 'HR', 'BGG', 200000)
+*
+ERROR at line 1:
+ORA-02290: check constraint (MCA180.VALID_LOC_CONS) violated 
+
+
+SQL> /
+Enter value for dno: D4
+Enter value for dname: HR
+Enter value for location: BNG
+Enter value for dept_budget: 200000
+old   1: insert into dept values('&dno', '&dname', '&location', &dept_budget)
+new   1: insert into dept values('D4', 'HR', 'BNG', 200000)
+
+1 row created.
+
+SQL> /
+Enter value for dno: D5
+Enter value for dname: Accounts
+Enter value for location: BNG
+Enter value for dept_budget: 500000
+old   1: insert into dept values('&dno', '&dname', '&location', &dept_budget)
+new   1: insert into dept values('D5', 'Accounts', 'BNG', 500000)
+
+1 row created.
+
+SQL> /
+Enter value for dno: Null
+Enter value for dname: Corporate
+Enter value for location: HYD
+Enter value for dept_budget: 700000
+old   1: insert into dept values('&dno', '&dname', '&location', &dept_budget)
+new   1: insert into dept values('Null', 'Corporate', 'HYD', 700000)
+insert into dept values('Null', 'Corporate', 'HYD', 700000)
+                        *
+ERROR at line 1:
+ORA-12899: value too large for column "MCA180"."DEPT"."DNO" (actual: 4, 
+maximum: 3) 
+
+
+SQL> /
+Enter value for dno: D6
+Enter value for dname: Corporate
+Enter value for location: HYD
+Enter value for dept_budget: 700000
+old   1: insert into dept values('&dno', '&dname', '&location', &dept_budget)
+new   1: insert into dept values('D6', 'Corporate', 'HYD', 700000)
+
+1 row created.
+
+SQL> /
+Enter value for dno: D7
+Enter value for dname: Sale
+Enter value for location: BNG
+Enter value for dept_budget: 500000
+old   1: insert into dept values('&dno', '&dname', '&location', &dept_budget)
+new   1: insert into dept values('D7', 'Sale', 'BNG', 500000)
+
+1 row created.
+
+SQL> /
+Enter value for dno: D8
+Enter value for dname: Develper
+Enter value for location: HYD
+Enter value for dept_budget: 500000
+old   1: insert into dept values('&dno', '&dname', '&location', &dept_budget)
+new   1: insert into dept values('D8', 'Develper', 'HYD', 500000)
+
+1 row created.
+
+SQL> commit;
+
+Commit complete.
+
+
+SQL> desc proj
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ DNO                                       NOT NULL VARCHAR2(3)
+ PRJ_NO                                    NOT NULL VARCHAR2(5)
+ PRJ_NAME                                           VARCHAR2(10)
+ PRJ_CREDIT                                         NUMBER(2)
+ STRT_DATE                                          DATE
+ END_DATE                                           DATE
+ PRJ_FUND                                           NUMBER(7)
+
+
+SQL> insert into proj values('&dno', '&prj_no', '&prj_name', &prj_credits, '&strt_date', '&end_date', &prj_fund);
+Enter value for dno: D1
+Enter value for prj_no: P1
+Enter value for prj_name: bank
+Enter value for prj_credits: 4
+Enter value for strt_date: 10 Jan 2020
+Enter value for end_date: 14 Dec 2020
+Enter value for prj_fund: 400000
+old   1: insert into proj values('&dno', '&prj_no', '&prj_name', &prj_credits, '&strt_date', '&end_date', &prj_fund)
+new   1: insert into proj values('D1', 'P1', 'bank', 4, '10 Jan 2020', '14 Dec 2020', 400000)
+
+1 row created.
+
+SQL> /
+Enter value for dno: D2
+Enter value for prj_no: P1
+Enter value for prj_name: atm
+Enter value for prj_credits: 2
+Enter value for strt_date: 15 jan 2020
+Enter value for end_date: 16 Jul 2020
+Enter value for prj_fund: 200000
+old   1: insert into proj values('&dno', '&prj_no', '&prj_name', &prj_credits, '&strt_date', '&end_date', &prj_fund)
+new   1: insert into proj values('D2', 'P1', 'atm', 2, '15 jan 2020', '16 Jul 2020', 200000)
+
+1 row created.
+
+SQL> /
+Enter value for dno: D3
+Enter value for prj_no: P2
+Enter value for prj_name: insurance
+Enter value for prj_credits: 3
+Enter value for strt_date: 30 March 2020
+Enter value for end_date: 25 Nov 2020
+Enter value for prj_fund: 300000
+old   1: insert into proj values('&dno', '&prj_no', '&prj_name', &prj_credits, '&strt_date', '&end_date', &prj_fund)
+new   1: insert into proj values('D3', 'P2', 'insurance', 3, '30 March 2020', '25 Nov 2020', 300000)
+
+1 row created.
+
+SQL> /
+Enter value for dno: D1
+Enter value for prj_no: P3
+Enter value for prj_name: credit
+Enter value for prj_credits: 5
+Enter value for strt_date: 22 Jul 2020
+Enter value for end_date: 28 Aug 2020
+Enter value for prj_fund: 500000
+old   1: insert into proj values('&dno', '&prj_no', '&prj_name', &prj_credits, '&strt_date', '&end_date', &prj_fund)
+new   1: insert into proj values('D1', 'P3', 'credit', 5, '22 Jul 2020', '28 Aug 2020', 500000)
+
+1 row created.
+
+SQL> /
+Enter value for dno: D4
+Enter value for prj_no: P2
+Enter value for prj_name: upi
+Enter value for prj_credits: 7
+Enter value for strt_date: 29 Aug 2020
+Enter value for end_date: 28 Dec 2020
+Enter value for prj_fund: 700000
+old   1: insert into proj values('&dno', '&prj_no', '&prj_name', &prj_credits, '&strt_date', '&end_date', &prj_fund)
+new   1: insert into proj values('D4', 'P2', 'upi', 7, '29 Aug 2020', '28 Dec 2020', 700000)
+
+1 row created.
+
+SQL>  /
+Enter value for dno: D7
+Enter value for prj_no: P4
+Enter value for prj_name: loan
+Enter value for prj_credits: 2
+Enter value for strt_date: 12 Apr 2020
+Enter value for end_date: 19 Oct 2020
+Enter value for prj_fund: 200000
+old   1:  insert into proj values('&dno', '&prj_no', '&prj_name', &prj_credits, '&strt_date', '&end_date', &prj_fund)
+new   1:  insert into proj values('D7', 'P4', 'loan', 2, '12 Apr 2020', '19 Oct 2020', 200000)
+
+1 row created.
+
+
+SQL> /
+Enter value for dno: D8
+Enter value for prj_no: P5
+Enter value for prj_name: ios app
+Enter value for prj_credits: 3
+Enter value for strt_date: 15 Mar 2020
+Enter value for end_date: 19 Nov 2020
+Enter value for prj_fund: 300000
+old   1:  insert into proj values('&dno', '&prj_no', '&prj_name', &prj_credits, '&strt_date', '&end_date', &prj_fund)
+new   1:  insert into proj values('D8', 'P5', 'ios app', 3, '15 Mar 2020', '19 Nov 2020', 300000)
+
+1 row created.               
+
+SQL> commit;
+
+Commit complete.
+
+SQL> spool off;
+
+SQL> alter table emp modify(sal number(7,2) constraint SAL_20KMore_Cons check(sal>20000));
+alter table emp modify(sal number(7,2) constraint SAL_20KMore_Cons check(sal>20000))
+                                                  *
+ERROR at line 1:
+ORA-02264: name already used by an existing constraint 
+
+
+SQL> alter table emp modify(sal number(7,2) constraint SAL20KMore_Cons check(sal>20000));
+
+Table altered.
+
+SQL> alter table drop constraint SAL_20KMore_Cons;
+alter table drop constraint SAL_20KMore_Cons
+            *
+ERROR at line 1:
+ORA-00903: invalid table name 
+
+
+SQL> alter table emp drop constraint SAL_20KMore_Cons;
+
+Table altered.
+
+SQL> alter table emp drop constraint SAL_20KMore_Cons check(sal>2000);
+alter table emp drop constraint SAL_20KMore_Cons check(sal>2000)
+                                                 *
+ERROR at line 1:
+ORA-01735: invalid ALTER TABLE option 
+
+
+
+SQL> commit;
+
+Commit complete.
+
+
+
+
+SQL> desc emp
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPNO                                     NOT NULL NUMBER(4)
+ ENAME                                              VARCHAR2(10)
+ JOB                                                VARCHAR2(9)
+ MGRID                                              NUMBER(4)
+ DATE_BIRTH                                         DATE
+ SAL                                                NUMBER(7,2)
+ COMM                                               NUMBER(7,2)
+ DEPTNO                                             VARCHAR2(3)
+ DATE_JOIN                                          DATE
+ PRJ_ID                                             VARCHAR2(5)
+
+SQL> insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(&empno, '&ename', '&job', to_date('&date_birth', 'DD-MM-YYYY'), &sal, &comm, '&Deptno', to_date('&date_join', 'DD-MM-YYYY'), '&prj_id');
+Enter value for empno: 100
+Enter value for ename: Ravi
+Enter value for job: MGR
+Enter value for date_birth: 10-10-1985
+Enter value for sal: 32000
+Enter value for comm: 10000
+Enter value for deptno: D1
+Enter value for date_join: 2-10-2001
+Enter value for prj_id: P1
+old   1: insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(&empno, '&ename', '&job', to_date('&date_birth', 'DD-MM-YYYY'), &sal, &comm, '&Deptno', to_date('&date_join', 'DD-MM-YYYY'), '&prj_id')
+new   1: insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(100, 'Ravi', 'MGR', to_date('10-10-1985', 'DD-MM-YYYY'), 32000, 10000, 'D1', to_date('2-10-2001', 'DD-MM-YYYY'), 'P1')
+insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(100, 'Ravi', 'MGR', to_date('10-10-1985', 'DD-MM-YYYY'), 32000, 10000, 'D1', to_date('2-10-2001', 'DD-MM-YYYY'), 'P1')
+*
+ERROR at line 1:
+ORA-02290: check constraint (MCA180.VALID_EMPNO_CONS) violated 
+
+
+SQL> /
+Enter value for empno: 101
+Enter value for ename: Ravi
+Enter value for job: MGR
+Enter value for date_birth: 10-10-1985
+Enter value for sal: 32000
+Enter value for comm: 10000
+Enter value for deptno: D1
+Enter value for date_join: 2-10-2001
+Enter value for prj_id: P1
+old   1: insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(&empno, '&ename', '&job', to_date('&date_birth', 'DD-MM-YYYY'), &sal, &comm, '&Deptno', to_date('&date_join', 'DD-MM-YYYY'), '&prj_id')
+new   1: insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(101, 'Ravi', 'MGR', to_date('10-10-1985', 'DD-MM-YYYY'), 32000, 10000, 'D1', to_date('2-10-2001', 'DD-MM-YYYY'), 'P1')
+
+1 row created.
+
+SQL> /
+Enter value for empno: 102
+Enter value for ename: Raviraj
+Enter value for job: CLRK
+Enter value for date_birth: 10-12-1985
+Enter value for sal: 24000
+Enter value for comm: 8000
+Enter value for deptno: D1
+Enter value for date_join: 12-11-2000
+Enter value for prj_id: P3
+old   1: insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(&empno, '&ename', '&job', to_date('&date_birth', 'DD-MM-YYYY'), &sal, &comm, '&Deptno', to_date('&date_join', 'DD-MM-YYYY'), '&prj_id')
+new   1: insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(102, 'Raviraj', 'CLRK', to_date('10-12-1985', 'DD-MM-YYYY'), 24000, 8000, 'D1', to_date('12-11-2000', 'DD-MM-YYYY'), 'P3')
+
+1 row created.
+
+SQL> /
+Enter value for empno: 111
+Enter value for ename: Raghu
+Enter value for job: GM
+Enter value for date_birth: 10-12-1974
+Enter value for sal: 45000
+Enter value for comm: 15000
+Enter value for deptno: null
+Enter value for date_join: 3-12-1985
+Enter value for prj_id: null
+old   1: insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(&empno, '&ename', '&job', to_date('&date_birth', 'DD-MM-YYYY'), &sal, &comm, '&Deptno', to_date('&date_join', 'DD-MM-YYYY'), '&prj_id')
+new   1: insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(111, 'Raghu', 'GM', to_date('10-12-1974', 'DD-MM-YYYY'), 45000, 15000, 'null', to_date('3-12-1985', 'DD-MM-YYYY'), 'null')
+insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(111, 'Raghu', 'GM', to_date('10-12-1974', 'DD-MM-YYYY'), 45000, 15000, 'null', to_date('3-12-1985', 'DD-MM-YYYY'), 'null')
+                                                                                                                                                                   *
+ERROR at line 1:
+ORA-12899: value too large for column "MCA180"."EMP"."DEPTNO" (actual: 4, 
+maximum: 3) 
+
+SQL> /
+Enter value for empno: 111
+Enter value for ename: Raghu
+Enter value for job: GM
+Enter value for date_birth: 10-12-1974
+Enter value for sal: 45000
+Enter value for comm: 15000
+Enter value for deptno: D2
+Enter value for date_join: 3-12-1985
+Enter value for prj_id: P1
+old   1: insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(&empno, '&ename', '&job', to_date('&date_birth', 'DD-MM-YYYY'), &sal, &comm, '&Deptno', to_date('&date_join', 'DD-MM-YYYY'), '&prj_id')
+new   1: insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(111, 'Raghu', 'GM', to_date('10-12-1974', 'DD-MM-YYYY'), 45000, 15000, 'D2', to_date('3-12-1985', 'DD-MM-YYYY'), 'P1')
+
+1 row created.
+
+SQL> /
+Enter value for empno: 150
+Enter value for ename: Saket
+Enter value for job: CEO
+Enter value for date_birth: 10-12-1970
+Enter value for sal: 60000
+Enter value for comm: 20000
+Enter value for deptno: null
+Enter value for date_join: 3-12-1990
+Enter value for prj_id: null
+old   1: insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(&empno, '&ename', '&job', to_date('&date_birth', 'DD-MM-YYYY'), &sal, &comm, '&Deptno', to_date('&date_join', 'DD-MM-YYYY'), '&prj_id')
+new   1: insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(150, 'Saket', 'CEO', to_date('10-12-1970', 'DD-MM-YYYY'), 60000, 20000, 'null', to_date('null', 'DD-MM-YYYY'), '3-12-1990')
+insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(150, 'Saket', 'CEO', to_date('10-12-1970', 'DD-MM-YYYY'), 60000, 20000, 'null', to_date('null', 'DD-MM-YYYY'), '3-12-1990')
+                                                                                                                                                                    *
+ERROR at line 1:
+ORA-12899: value too large for column "MCA180"."EMP"."DEPTNO" (actual: 4, 
+maximum: 3) 
+
+
+SQL> /
+Enter value for empno: 150
+Enter value for ename: Saket
+Enter value for job: CEO
+Enter value for date_birth: 10-12-1970
+Enter value for sal: 60000
+Enter value for comm: 20000
+Enter value for deptno: D1
+Enter value for date_join: 3-12-1990
+Enter value for prj_id: null
+old   1: insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(&empno, '&ename', '&job', to_date('&date_birth', 'DD-MM-YYYY'), &sal, &comm, '&Deptno', to_date('&date_join', 'DD-MM-YYYY'), '&prj_id')
+new   1: insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(150, 'Saket', 'CEO', to_date('10-12-1970', 'DD-MM-YYYY'), 60000, 20000, 'D1', to_date('3-12-1990', 'DD-MM-YYYY'), 'null')
+insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(150, 'Saket', 'CEO', to_date('10-12-1970', 'DD-MM-YYYY'), 60000, 20000, 'D1', to_date('3-12-1990', 'DD-MM-YYYY'), 'null')
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (MCA180.SYS_C0062781) violated - parent key not 
+found 
+
+
+SQL> /
+Enter value for empno: 150
+Enter value for ename: Saket
+Enter value for job: CEO
+Enter value for date_birth: 10-12-1970
+Enter value for sal: 60000
+Enter value for comm: 20000
+Enter value for deptno: D1
+Enter value for date_join: 3-12-1990
+Enter value for prj_id: P1
+old   1: insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(&empno, '&ename', '&job', to_date('&date_birth', 'DD-MM-YYYY'), &sal, &comm, '&Deptno', to_date('&date_join', 'DD-MM-YYYY'), '&prj_id')
+new   1: insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(150, 'Saket', 'CEO', to_date('10-12-1970', 'DD-MM-YYYY'), 60000, 20000, 'D1', to_date('3-12-1990', 'DD-MM-YYYY'), 'P1')
+
+1 row created.
+
+SQL> /
+Enter value for empno: 103
+Enter value for ename: Raj
+Enter value for job: A.CLRK
+Enter value for date_birth: 10-12-1980
+Enter value for sal: 21000
+Enter value for comm: 5000
+Enter value for deptno: D1
+Enter value for date_join: 2-10-2001
+Enter value for prj_id: P1
+old   1: insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(&empno, '&ename', '&job', to_date('&date_birth', 'DD-MM-YYYY'), &sal, &comm, '&Deptno', to_date('&date_join', 'DD-MM-YYYY'), '&prj_id')
+new   1: insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(103, 'Raj', 'A.CLRK', to_date('10-12-1980', 'DD-MM-YYYY'), 18000, 5000, 'D1', to_date('2-10-2001', 'DD-MM-YYYY'), 'P1')
+insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(103, 'Raj', 'A.CLRK', to_date('10-12-1980', 'DD-MM-YYYY'), 18000, 5000, 'D1', to_date('2-10-2001', 'DD-MM-YYYY'), 'P1')
+*
+ERROR at line 1:
+ORA-02290: check constraint (MCA180.JOB_CHK_CONS) violated 
+
+
+SQL> /
+Enter value for empno: 103
+Enter value for ename: Raj
+Enter value for job: CLRK
+Enter value for date_birth: 10-12-1980
+Enter value for sal: 21000
+Enter value for comm: 5000
+Enter value for deptno: D1
+Enter value for date_join: 2-10-2001
+Enter value for prj_id: P1
+old   1: insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(&empno, '&ename', '&job', to_date('&date_birth', 'DD-MM-YYYY'), &sal, &comm, '&Deptno', to_date('&date_join', 'DD-MM-YYYY'), '&prj_id')
+new   1: insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(103, 'Raj', 'CLRK', to_date('10-12-1980', 'DD-MM-YYYY'), 21000, 5000, 'D1', to_date('2-10-2001', 'DD-MM-YYYY'), 'P1')
+
+1 row created.
+
+SQL> /
+Enter value for empno: 103
+Enter value for ename: Suraj
+Enter value for job: CLRK
+Enter value for date_birth: 2-10-1980
+Enter value for sal: 25000
+Enter value for comm: 3000
+Enter value for deptno: D1
+Enter value for date_join: 2-10-2002
+Enter value for prj_id: P3
+old   1: insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(&empno, '&ename', '&job', to_date('&date_birth', 'DD-MM-YYYY'), &sal, &comm, '&Deptno', to_date('&date_join', 'DD-MM-YYYY'), '&prj_id')
+new   1: insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(103, 'Suraj', 'CLRK', to_date('2-10-1980', 'DD-MM-YYYY'), 25000, 3000, 'D1', to_date('2-10-2002', 'DD-MM-YYYY'), 'P3')
+insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(103, 'Suraj', 'CLRK', to_date('2-10-1980', 'DD-MM-YYYY'), 25000, 3000, 'D1', to_date('2-10-2002', 'DD-MM-YYYY'), 'P3')
+*
+ERROR at line 1:
+ORA-00001: unique constraint (MCA180.SYS_C0062522) violated 
+
+
+SQL> /
+Enter value for empno: 133
+Enter value for ename: Suraj
+Enter value for job: CLRK
+Enter value for date_birth: 2-10-1980
+Enter value for sal: 25000
+Enter value for comm: 3000
+Enter value for deptno: D1
+Enter value for date_join: 2-10-2002
+Enter value for prj_id: P3
+old   1: insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(&empno, '&ename', '&job', to_date('&date_birth', 'DD-MM-YYYY'), &sal, &comm, '&Deptno', to_date('&date_join', 'DD-MM-YYYY'), '&prj_id')
+new   1: insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(133, 'Suraj', 'CLRK', to_date('2-10-1980', 'DD-MM-YYYY'), 25000, 3000, 'D1', to_date('2-10-2002', 'DD-MM-YYYY'), 'P3')
+
+1 row created.
+
+SQL> /
+Enter value for empno: 125
+Enter value for ename: Manu
+Enter value for job: A.MGR
+Enter value for date_birth: 10-12-1980
+Enter value for sal: 30000
+Enter value for comm: 6000
+Enter value for deptno: D4
+Enter value for date_join: 2-10-2002
+Enter value for prj_id: P2
+old   1: insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(&empno, '&ename', '&job', to_date('&date_birth', 'DD-MM-YYYY'), &sal, &comm, '&Deptno', to_date('&date_join', 'DD-MM-YYYY'), '&prj_id')
+new   1: insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(125, 'Manu', 'A.MGR', to_date('10-12-1980', 'DD-MM-YYYY'), 30000, 6000, 'D4', to_date('2-10-2002', 'DD-MM-YYYY'), 'P2')
+
+1 row created.
+
+SQL> /
+Enter value for empno: 104
+Enter value for ename: Rohan
+Enter value for job: CLERK
+Enter value for date_birth: 2-10-1980
+Enter value for sal: 26000
+Enter value for comm: 5000
+Enter value for deptno: D2
+Enter value for date_join: 2-10-2005
+Enter value for prj_id: P1
+old   1: insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(&empno, '&ename', '&job', to_date('&date_birth', 'DD-MM-YYYY'), &sal, &comm, '&Deptno', to_date('&date_join', 'DD-MM-YYYY'), '&prj_id')
+new   1: insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(104, 'Rohan', 'CLERK', to_date('2-10-1980', 'DD-MM-YYYY'), 26000, 5000, 'D2', to_date('2-10-2005', 'DD-MM-YYYY'), 'P1')
+insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(104, 'Rohan', 'CLERK', to_date('2-10-1980', 'DD-MM-YYYY'), 26000, 5000, 'D2', to_date('2-10-2005', 'DD-MM-YYYY'), 'P1')
+*
+ERROR at line 1:
+ORA-02290: check constraint (MCA180.JOB_CHK_CONS) violated 
+
+
+SQL> /
+Enter value for empno: 104
+Enter value for ename: Rohan
+Enter value for job: CLRK
+Enter value for date_birth: 2-10-1980
+Enter value for sal: 26000
+Enter value for comm: 5000
+Enter value for deptno: D2
+Enter value for date_join: 2-10-2005
+Enter value for prj_id: P1
+old   1: insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(&empno, '&ename', '&job', to_date('&date_birth', 'DD-MM-YYYY'), &sal, &comm, '&Deptno', to_date('&date_join', 'DD-MM-YYYY'), '&prj_id')
+new   1: insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(104, 'Rohan', 'CLRK', to_date('2-10-1980', 'DD-MM-YYYY'), 26000, 5000, 'D2', to_date('2-10-2005', 'DD-MM-YYYY'), 'P1')
+
+1 row created.
+
+
+SQL> /
+Enter value for empno: 106
+Enter value for ename: Sachin
+Enter value for job: MGR
+Enter value for date_birth: 2-10-1986
+Enter value for sal: 36000
+Enter value for comm: 6000
+Enter value for deptno: D2
+Enter value for date_join: 2-10-1985
+Enter value for prj_id: P1
+old   1: insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(&empno, '&ename', '&job', to_date('&date_birth', 'DD-MM-YYYY'), &sal, &comm, '&Deptno', to_date('&date_join', 'DD-MM-YYYY'), '&prj_id')
+new   1: insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(106, 'Sachin', 'MGR', to_date('2-10-1986', 'DD-MM-YYYY'), 36000, 6000, 'D2', to_date('2-10-1985', 'DD-MM-YYYY'), 'P1')
+insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(106, 'Sachin', 'MGR', to_date('2-10-1986', 'DD-MM-YYYY'), 36000, 6000, 'D2', to_date('2-10-1985', 'DD-MM-YYYY'), 'P1')
+*
+ERROR at line 1:
+ORA-02290: check constraint (MCA180.DB_LESS_DBJOIN_CONS) violated 
+
+
+SQL> /
+Enter value for empno: 106
+Enter value for ename: Sachin
+Enter value for job: MGR
+Enter value for date_birth: 2-10-1986
+Enter value for sal: 36000
+Enter value for comm: 6000
+Enter value for deptno: D2
+Enter value for date_join: 2-10-2000
+Enter value for prj_id: P1
+old   1: insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(&empno, '&ename', '&job', to_date('&date_birth', 'DD-MM-YYYY'), &sal, &comm, '&Deptno', to_date('&date_join', 'DD-MM-YYYY'), '&prj_id')
+new   1: insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(106, 'Sachin', 'MGR', to_date('2-10-1986', 'DD-MM-YYYY'), 36000, 6000, 'D2', to_date('2-10-2000', 'DD-MM-YYYY'), 'P1')
+
+1 row created.
+
+SQL> /
+Enter value for empno: 123
+Enter value for ename: Mahesh
+Enter value for job: CLRK
+Enter value for date_birth: 10-12-1974
+Enter value for sal: 25000
+Enter value for comm: 5000
+Enter value for deptno: D3
+Enter value for date_join: 2-10-2002
+Enter value for prj_id: P2
+old   1: insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(&empno, '&ename', '&job', to_date('&date_birth', 'DD-MM-YYYY'), &sal, &comm, '&Deptno', to_date('&date_join', 'DD-MM-YYYY'), '&prj_id')
+new   1: insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(123, 'Mahesh', 'CLRK', to_date('10-12-1974', 'DD-MM-YYYY'), 25000, 5000, 'D3', to_date('2-10-2002', 'DD-MM-YYYY'), 'P2')
+
+1 row created.
+
+SQL> /
+Enter value for empno: 108
+Enter value for ename: Rajat
+Enter value for job: CLRK
+Enter value for date_birth: 10-12-1970
+Enter value for sal: 23000
+Enter value for comm: 4000
+Enter value for deptno: D4
+Enter value for date_join: 2-10-1985
+Enter value for prj_id: P2
+old   1: insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(&empno, '&ename', '&job', to_date('&date_birth', 'DD-MM-YYYY'), &sal, &comm, '&Deptno', to_date('&date_join', 'DD-MM-YYYY'), '&prj_id')
+new   1: insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(108, 'Rajat', 'CLRK', to_date('10-12-1970', 'DD-MM-YYYY'), 23000, 4000, 'D4', to_date('2-10-1985', 'DD-MM-YYYY'), 'P2')
+
+1 row created.
+
+SQL> /
+Enter value for empno: 103
+Enter value for ename: Arya
+Enter value for job: CLRK
+Enter value for date_birth: 10-12-1980
+Enter value for sal: 26000
+Enter value for comm: 3000
+Enter value for deptno: D7
+Enter value for date_join: 2-10-2001
+Enter value for prj_id: P4
+old   1: insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(&empno, '&ename', '&job', to_date('&date_birth', 'DD-MM-YYYY'), &sal, &comm, '&Deptno', to_date('&date_join', 'DD-MM-YYYY'), '&prj_id')
+new   1: insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(103, 'Arya', 'CLRK', to_date('10-12-1980', 'DD-MM-YYYY'), 26000, 3000, 'D7', to_date('2-10-2001', 'DD-MM-YYYY'), 'P4')
+insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(103, 'Arya', 'CLRK', to_date('10-12-1980', 'DD-MM-YYYY'), 26000, 3000, 'D7', to_date('2-10-2001', 'DD-MM-YYYY'), 'P4')
+*
+ERROR at line 1:
+ORA-00001: unique constraint (MCA180.SYS_C0062522) violated 
+
+
+SQL> /
+Enter value for empno: 109
+Enter value for ename: Arya
+Enter value for job: CLRK
+Enter value for date_birth: 10-12-1980
+Enter value for sal: 26000
+Enter value for comm: 3000
+Enter value for deptno: D7
+Enter value for date_join: 2-10-2001
+Enter value for prj_id: P4
+old   1: insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(&empno, '&ename', '&job', to_date('&date_birth', 'DD-MM-YYYY'), &sal, &comm, '&Deptno', to_date('&date_join', 'DD-MM-YYYY'), '&prj_id')
+new   1: insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(109, 'Arya', 'CLRK', to_date('10-12-1980', 'DD-MM-YYYY'), 26000, 3000, 'D7', to_date('2-10-2001', 'DD-MM-YYYY'), 'P4')
+
+1 row created.
+
+SQL> /
+Enter value for empno: null
+Enter value for ename: Amit
+Enter value for job: CLRK
+Enter value for date_birth: 10-12-1980
+Enter value for sal: 18000
+Enter value for comm: 4000
+Enter value for deptno: D5
+Enter value for date_join: 10-12-1980
+Enter value for prj_id: P4
+old   1: insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(&empno, '&ename', '&job', to_date('&date_birth', 'DD-MM-YYYY'), &sal, &comm, '&Deptno', to_date('&date_join', 'DD-MM-YYYY'), '&prj_id')
+new   1: insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(null, 'Amit', 'CLRK', to_date('10-12-1980', 'DD-MM-YYYY'), 18000, 4000, 'D5', to_date('10-12-1980', 'DD-MM-YYYY'), 'P4')
+insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(null, 'Amit', 'CLRK', to_date('10-12-1980', 'DD-MM-YYYY'), 18000, 4000, 'D5', to_date('10-12-1980', 'DD-MM-YYYY'), 'P4')
+                                                                                            *
+ERROR at line 1:
+ORA-01400: cannot insert NULL into ("MCA180"."EMP"."EMPNO") 
+
+
+SQL> /
+Enter value for empno: 115
+Enter value for ename: Amit
+Enter value for job: CLRK
+Enter value for date_birth: 10-12-1980
+Enter value for sal: 18000
+Enter value for comm: 4000
+Enter value for deptno: D5
+Enter value for date_join: 10-12-1980
+Enter value for prj_id: P4
+old   1: insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(&empno, '&ename', '&job', to_date('&date_birth', 'DD-MM-YYYY'), &sal, &comm, '&Deptno', to_date('&date_join', 'DD-MM-YYYY'), '&prj_id')
+new   1: insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(115, 'Amit', 'CLRK', to_date('10-12-1980', 'DD-MM-YYYY'), 18000, 4000, 'D5', to_date('10-12-1980', 'DD-MM-YYYY'), 'P4')
+insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(115, 'Amit', 'CLRK', to_date('10-12-1980', 'DD-MM-YYYY'), 18000, 4000, 'D5', to_date('10-12-1980', 'DD-MM-YYYY'), 'P4')
+*
+ERROR at line 1:
+ORA-02290: check constraint (MCA180.DB_LESS_DBJOIN_CONS) violated 
+
+
+SQL> /
+Enter value for empno: 115
+Enter value for ename: Amit
+Enter value for job: CLRK
+Enter value for date_birth: 10-12-1980
+Enter value for sal: 18000
+Enter value for comm: 4000
+Enter value for deptno: D5
+Enter value for date_join: 10-12-1980
+Enter value for prj_id: P4
+old   1: insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(&empno, '&ename', '&job', to_date('&date_birth', 'DD-MM-YYYY'), &sal, &comm, '&Deptno', to_date('&date_join', 'DD-MM-YYYY'), '&prj_id')
+new   1: insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(115, 'Amit', 'CLRK', to_date('10-12-1980', 'DD-MM-YYYY'), 18000, 4000, 'D5', to_date('10-12-1980', 'DD-MM-YYYY'), 'P4')
+insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(115, 'Amit', 'CLRK', to_date('10-12-1980', 'DD-MM-YYYY'), 18000, 4000, 'D5', to_date('10-12-1980', 'DD-MM-YYYY'), 'P4')
+*
+ERROR at line 1:
+ORA-02290: check constraint (MCA180.DB_LESS_DBJOIN_CONS) violated 
+
+
+SQL> /
+Enter value for empno: 115
+Enter value for ename: Amit
+Enter value for job: CLRK
+Enter value for date_birth: 10-12-1980
+Enter value for sal: 18000
+Enter value for comm: 4000
+Enter value for deptno: D5
+Enter value for date_join: 10-12-2004
+Enter value for prj_id: P4
+old   1: insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(&empno, '&ename', '&job', to_date('&date_birth', 'DD-MM-YYYY'), &sal, &comm, '&Deptno', to_date('&date_join', 'DD-MM-YYYY'), '&prj_id')
+new   1: insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(115, 'Amit', 'CLRK', to_date('10-12-1980', 'DD-MM-YYYY'), 18000, 4000, 'D5', to_date('10-12-2004', 'DD-MM-YYYY'), 'P4')
+insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(115, 'Amit', 'CLRK', to_date('10-12-1980', 'DD-MM-YYYY'), 18000, 4000, 'D5', to_date('10-12-2004', 'DD-MM-YYYY'), 'P4')
+*
+ERROR at line 1:
+ORA-02290: check constraint (MCA180.SAL20KMORE_CONS) violated 
+
+
+SQL> /
+Enter value for empno: 115
+Enter value for ename: Amit
+Enter value for job: CLRK
+Enter value for date_birth: 10-12-1980
+Enter value for sal: 21000
+Enter value for comm: 10-12-2004
+Enter value for deptno: P4
+Enter value for date_join: 
+Enter value for prj_id: 
+old   1: insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(&empno, '&ename', '&job', to_date('&date_birth', 'DD-MM-YYYY'), &sal, &comm, '&Deptno', to_date('&date_join', 'DD-MM-YYYY'), '&prj_id')
+new   1: insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(115, 'Amit', 'CLRK', to_date('10-12-1980', 'DD-MM-YYYY'), 21000, 10-12-2004, 'P4', to_date('', 'DD-MM-YYYY'), '')
+insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(115, 'Amit', 'CLRK', to_date('10-12-1980', 'DD-MM-YYYY'), 21000, 10-12-2004, 'P4', to_date('', 'DD-MM-YYYY'), '')
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (MCA180.DEPTNO_FK_DEPT_CONS) violated - parent 
+key not found 
+
+
+SQL> 
+SQL> /
+Enter value for empno: 115
+Enter value for ename: Amit
+Enter value for job: CLRK
+Enter value for date_birth: 10-12-1980
+Enter value for sal: 21000
+Enter value for comm: 10-12-2004
+Enter value for deptno: D5
+Enter value for date_join: 10
+Enter value for prj_id: 
+old   1: insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(&empno, '&ename', '&job', to_date('&date_birth', 'DD-MM-YYYY'), &sal, &comm, '&Deptno', to_date('&date_join', 'DD-MM-YYYY'), '&prj_id')
+new   1: insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(115, 'Amit', 'CLRK', to_date('10-12-1980', 'DD-MM-YYYY'), 21000, 10-12-2004, 'D5', to_date('10', 'DD-MM-YYYY'), '')
+insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(115, 'Amit', 'CLRK', to_date('10-12-1980', 'DD-MM-YYYY'), 21000, 10-12-2004, 'D5', to_date('10', 'DD-MM-YYYY'), '')
+                                                                                                                                                                                       *
+ERROR at line 1:
+ORA-01840: input value not long enough for date format 
+
+
+SQL> 
+SQL> /
+Enter value for empno: 115
+Enter value for ename: Amit
+Enter value for job: CLRK
+Enter value for date_birth: 10-12-1980
+Enter value for sal: 21000
+Enter value for comm: 5000
+Enter value for deptno: D5
+Enter value for date_join: P4
+Enter value for prj_id: \
+old   1: insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(&empno, '&ename', '&job', to_date('&date_birth', 'DD-MM-YYYY'), &sal, &comm, '&Deptno', to_date('&date_join', 'DD-MM-YYYY'), '&prj_id')
+new   1: insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(115, 'Amit', 'CLRK', to_date('10-12-1980', 'DD-MM-YYYY'), 21000, 5000, 'D5', to_date('P4', 'DD-MM-YYYY'), '\')
+insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(115, 'Amit', 'CLRK', to_date('10-12-1980', 'DD-MM-YYYY'), 21000, 5000, 'D5', to_date('P4', 'DD-MM-YYYY'), '\')
+                                                                                                                                                                                 *
+ERROR at line 1:
+ORA-01858: a non-numeric character was found where a numeric was expected 
+
+
+SQL> /
+Enter value for empno: 115
+Enter value for ename: Amit
+Enter value for job: CLRK
+Enter value for date_birth: 10-12-1980
+Enter value for sal: 21000
+Enter value for comm: 5000
+Enter value for deptno: D5
+Enter value for date_join: 10-12-2004
+Enter value for prj_id: P4
+old   1: insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(&empno, '&ename', '&job', to_date('&date_birth', 'DD-MM-YYYY'), &sal, &comm, '&Deptno', to_date('&date_join', 'DD-MM-YYYY'), '&prj_id')
+new   1: insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(115, 'Amit', 'CLRK', to_date('10-12-1980', 'DD-MM-YYYY'), 21000, 5000, 'D5', to_date('10-12-2004', 'DD-MM-YYYY'), 'P4')
+insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(115, 'Amit', 'CLRK', to_date('10-12-1980', 'DD-MM-YYYY'), 21000, 5000, 'D5', to_date('10-12-2004', 'DD-MM-YYYY'), 'P4')
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (MCA180.SYS_C0062781) violated - parent key not 
+found 
+
+
+SQL> /
+Enter value for empno: 115
+Enter value for ename: Amit
+Enter value for job: CLRK
+Enter value for date_birth: 10-12-1980
+Enter value for sal: 21000
+Enter value for comm: 5000
+Enter value for deptno: D7
+Enter value for date_join: 10-12-2004
+Enter value for prj_id: P4
+old   1: insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(&empno, '&ename', '&job', to_date('&date_birth', 'DD-MM-YYYY'), &sal, &comm, '&Deptno', to_date('&date_join', 'DD-MM-YYYY'), '&prj_id')
+new   1: insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(115, 'Amit', 'CLRK', to_date('10-12-1980', 'DD-MM-YYYY'), 21000, 5000, 'D7', to_date('10-12-2004', 'DD-MM-YYYY'), 'P4')
+
+1 row created.
+
+SQL> /
+Enter value for empno: 116
+Enter value for ename: Raj
+Enter value for job: MGR
+Enter value for date_birth: 02-10-1990
+Enter value for sal: 35000
+Enter value for comm: 5000
+Enter value for deptno: D8
+Enter value for date_join: 10-12-2005
+Enter value for prj_id: P5
+old   1: insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(&empno, '&ename', '&job', to_date('&date_birth', 'DD-MM-YYYY'), &sal, &comm, '&Deptno', to_date('&date_join', 'DD-MM-YYYY'), '&prj_id')
+new   1: insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(116, 'Raj', 'MGR', to_date('02-10-1990', 'DD-MM-YYYY'), 35000, 5000, 'D8', to_date('10-12-2005', 'DD-MM-YYYY'), 'P5')
+
+1 row created.
+
+SQL> /
+Enter value for empno: 117
+Enter value for ename: Sahil
+Enter value for job: CLRK
+Enter value for date_birth: 4-2-1982
+Enter value for sal: 30000
+Enter value for comm: 4000
+Enter value for deptno: D1
+Enter value for date_join: 3-1-2000
+Enter value for prj_id: P3
+old   1: insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(&empno, '&ename', '&job', to_date('&date_birth', 'DD-MM-YYYY'), &sal, &comm, '&Deptno', to_date('&date_join', 'DD-MM-YYYY'), '&prj_id')
+new   1: insert into emp (empno, ename, job,date_birth, sal, comm, deptno, date_join, prj_id) values(117, 'Sahil', 'CLRK', to_date('4-2-1982', 'DD-MM-YYYY'), 30000, 4000, 'D1', to_date('3-1-2000', 'DD-MM-YYYY'), 'P3')
+
+1 row created.
+
+SQL> select * from emp;
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP  
+---------- ---------- --------- ---------- --------- ---------- ---------- ---  
+DATE_JOIN PRJ_I                                                                 
+--------- -----                                                                 
+       101 Ravi       MGR                  10-OCT-85      32000      10000 D1   
+02-OCT-01 P1                                                                    
+                                                                                
+       102 Raviraj    CLRK                 10-DEC-85      24000       8000 D1   
+12-NOV-00 P3                                                                    
+                                                                                
+       111 Raghu      GM                   10-DEC-74      45000      15000 D2   
+03-DEC-85 P1                                                                    
+                                                                                
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP  
+---------- ---------- --------- ---------- --------- ---------- ---------- ---  
+DATE_JOIN PRJ_I                                                                 
+--------- -----                                                                 
+       150 Saket      CEO                  10-DEC-70      60000      20000 D1   
+03-DEC-90 P1                                                                    
+                                                                                
+       103 Raj        CLRK                 10-DEC-80      21000       5000 D1   
+02-OCT-01 P1                                                                    
+                                                                                
+       133 Suraj      CLRK                 02-OCT-80      25000       3000 D1   
+02-OCT-02 P3                                                                    
+                                                                                
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP  
+---------- ---------- --------- ---------- --------- ---------- ---------- ---  
+DATE_JOIN PRJ_I                                                                 
+--------- -----                                                                 
+       125 Manu       A.MGR                10-DEC-80      30000       6000 D4   
+02-OCT-02 P2                                                                    
+                                                                                
+       104 Rohan      CLRK                 02-OCT-80      26000       5000 D2   
+02-OCT-05 P1                                                                    
+                                                                                
+       106 Sachin     MGR                  02-OCT-86      36000       6000 D2   
+02-OCT-00 P1                                                                    
+                                                                                
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP  
+---------- ---------- --------- ---------- --------- ---------- ---------- ---  
+DATE_JOIN PRJ_I                                                                 
+--------- -----                                                                 
+       123 Mahesh     CLRK                 10-DEC-74      25000       5000 D3   
+02-OCT-02 P2                                                                    
+                                                                                
+       108 Rajat      CLRK                 10-DEC-70      23000       4000 D4   
+02-OCT-85 P2                                                                    
+                                                                                
+       109 Arya       CLRK                 10-DEC-80      26000       3000 D7   
+02-OCT-01 P4                                                                    
+                                                                                
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP  
+---------- ---------- --------- ---------- --------- ---------- ---------- ---  
+DATE_JOIN PRJ_I                                                                 
+--------- -----                                                                 
+       115 Amit       CLRK                 10-DEC-80      21000       5000 D7   
+10-DEC-04 P4                                                                    
+                                                                                
+       116 Raj        MGR                  02-OCT-90      35000       5000 D8   
+10-DEC-05 P5                                                                    
+                                                                                
+       117 Sahil      CLRK                 04-FEB-82      30000       4000 D1   
+03-JAN-00 P3                                                                    
+                                                                                
+
+15 rows selected.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> desc emp;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPNO                                     NOT NULL NUMBER(4)
+ ENAME                                              VARCHAR2(10)
+ JOB                                                VARCHAR2(9)
+ MGRID                                              NUMBER(4)
+ DATE_BIRTH                                         DATE
+ SAL                                                NUMBER(7,2)
+ COMM                                               NUMBER(7,2)
+ DEPTNO                                             VARCHAR2(3)
+ DATE_JOIN                                          DATE
+ PRJ_ID                                             VARCHAR2(5)
+
+SQL> update emp set mgrid=111 where empno=101;
+
+1 row updated.
+
+SQL> update emp set mgrid=106 where empno=102;
+
+1 row updated.
+
+SQL> update emp set mgrid=150 where empno=111;
+
+1 row updated. 
+
+SQL> update emp set mgrid=null where empno=150;
+
+1 row updated.
+
+SQL> update emp set mgrid=111 where empno=103;
+
+1 row updated.
+
+SQL> update emp set mgrid=111 where empno=133;
+
+1 row updated.
+
+SQL> update emp set mgrid=150 where empno=125;
+
+1 row updated.
+
+SQL> update emp set mgrid=125 where empno=104;
+
+1 row updated.
+
+SQL> update emp set mgrid=111 where empno=106;
+
+1 row updated.
+
+SQL> update emp set mgrid=150 where empno=123;
+
+1 row updated.
+
+SQL> update emp set mgrid=106 where empno=108;
+
+1 row updated.
+
+SQL> update emp set mgrid=111 where empno=109;
+
+1 row updated.
+
+SQL> update emp set mgrid=106 where empno=115;
+
+1 row updated.
+
+SQL> update emp set mgrid=150 where empno=116;
+
+1 row updated.
+
+SQL> update emp set mgrid=116 where empno=117;
+
+1 row updated.
+
+SQL> select * from emp;
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP  
+---------- ---------- --------- ---------- --------- ---------- ---------- ---  
+DATE_JOIN PRJ_I                                                                 
+--------- -----                                                                 
+       101 Ravi       MGR              111 10-OCT-85      32000      10000 D1   
+02-OCT-01 P1                                                                    
+                                                                                
+       102 Raviraj    CLRK             106 10-DEC-85      24000       8000 D1   
+12-NOV-00 P3                                                                    
+                                                                                
+       111 Raghu      GM               150 10-DEC-74      45000      15000 D2   
+03-DEC-85 P1                                                                    
+                                                                                
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP  
+---------- ---------- --------- ---------- --------- ---------- ---------- ---  
+DATE_JOIN PRJ_I                                                                 
+--------- -----                                                                 
+       150 Saket      CEO                  10-DEC-70      60000      20000 D1   
+03-DEC-90 P1                                                                    
+                                                                                
+       103 Raj        CLRK             111 10-DEC-80      21000       5000 D1   
+02-OCT-01 P1                                                                    
+                                                                                
+       133 Suraj      CLRK             111 02-OCT-80      25000       3000 D1   
+02-OCT-02 P3                                                                    
+                                                                                
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP  
+---------- ---------- --------- ---------- --------- ---------- ---------- ---  
+DATE_JOIN PRJ_I                                                                 
+--------- -----                                                                 
+       125 Manu       A.MGR            150 10-DEC-80      30000       6000 D4   
+02-OCT-02 P2                                                                    
+                                                                                
+       104 Rohan      CLRK             125 02-OCT-80      26000       5000 D2   
+02-OCT-05 P1                                                                    
+                                                                                
+       106 Sachin     MGR              111 02-OCT-86      36000       6000 D2   
+02-OCT-00 P1                                                                    
+                                                                                
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP  
+---------- ---------- --------- ---------- --------- ---------- ---------- ---  
+DATE_JOIN PRJ_I                                                                 
+--------- -----                                                                 
+       123 Mahesh     CLRK             150 10-DEC-74      25000       5000 D3   
+02-OCT-02 P2                                                                    
+                                                                                
+       108 Rajat      CLRK             106 10-DEC-70      23000       4000 D4   
+02-OCT-85 P2                                                                    
+                                                                                
+       109 Arya       CLRK             111 10-DEC-80      26000       3000 D7   
+02-OCT-01 P4                                                                    
+                                                                                
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP  
+---------- ---------- --------- ---------- --------- ---------- ---------- ---  
+DATE_JOIN PRJ_I                                                                 
+--------- -----                                                                 
+       115 Amit       CLRK             106 10-DEC-80      21000       5000 D7   
+10-DEC-04 P4                                                                    
+                                                                                
+       116 Raj        MGR              150 02-OCT-90      35000       5000 D8   
+10-DEC-05 P5                                                                    
+                                                                                
+       117 Sahil      CLRK             116 04-FEB-82      30000       4000 D1   
+03-JAN-00 P3                                                                    
+                                                                                
+
+15 rows selected.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> spool off;
+SQL> commit;
+
+Commit complete.
+
+SQL> desc emp;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPNO                                     NOT NULL NUMBER(4)
+ ENAME                                              VARCHAR2(10)
+ JOB                                                VARCHAR2(9)
+ MGRID                                              NUMBER(4)
+ DATE_BIRTH                                         DATE
+ SAL                                                NUMBER(7,2)
+ COMM                                               NUMBER(7,2)
+ DEPTNO                                             VARCHAR2(3)
+ DATE_JOIN                                          DATE
+ PRJ_ID                                             VARCHAR2(5)
+
+SQL> commit;
+
+Commit complete.
+
+SQL> delete from emp where prj_id = 'P3';
+
+3 rows deleted.
+
+SQL> rollback;
+
+Rollback complete.
+
+SQL> select * from emp;
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP  
+---------- ---------- --------- ---------- --------- ---------- ---------- ---  
+DATE_JOIN PRJ_I                                                                 
+--------- -----                                                                 
+       101 Ravi       MGR              111 10-OCT-85      32000      10000 D1   
+02-OCT-01 P1                                                                    
+                                                                                
+       102 Raviraj    CLRK             106 10-DEC-85      24000       8000 D1   
+12-NOV-00 P3                                                                    
+                                                                                
+       111 Raghu      GM               150 10-DEC-74      45000      15000 D2   
+03-DEC-85 P1                                                                    
+                                                                                
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP  
+---------- ---------- --------- ---------- --------- ---------- ---------- ---  
+DATE_JOIN PRJ_I                                                                 
+--------- -----                                                                 
+       150 Saket      CEO                  10-DEC-70      60000      20000 D1   
+03-DEC-90 P1                                                                    
+                                                                                
+       103 Raj        CLRK             111 10-DEC-80      21000       5000 D1   
+02-OCT-01 P1                                                                    
+                                                                                
+       133 Suraj      CLRK             111 02-OCT-80      25000       3000 D1   
+02-OCT-02 P3                                                                    
+                                                                                
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP  
+---------- ---------- --------- ---------- --------- ---------- ---------- ---  
+DATE_JOIN PRJ_I                                                                 
+--------- -----                                                                 
+       125 Manu       A.MGR            150 10-DEC-80      30000       6000 D4   
+02-OCT-02 P2                                                                    
+                                                                                
+       104 Rohan      CLRK             125 02-OCT-80      26000       5000 D2   
+02-OCT-05 P1                                                                    
+                                                                                
+       106 Sachin     MGR              111 02-OCT-86      36000       6000 D2   
+02-OCT-00 P1                                                                    
+                                                                                
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP  
+---------- ---------- --------- ---------- --------- ---------- ---------- ---  
+DATE_JOIN PRJ_I                                                                 
+--------- -----                                                                 
+       123 Mahesh     CLRK             150 10-DEC-74      25000       5000 D3   
+02-OCT-02 P2                                                                    
+                                                                                
+       108 Rajat      CLRK             106 10-DEC-70      23000       4000 D4   
+02-OCT-85 P2                                                                    
+                                                                                
+       109 Arya       CLRK             111 10-DEC-80      26000       3000 D7   
+02-OCT-01 P4                                                                    
+                                                                                
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP  
+---------- ---------- --------- ---------- --------- ---------- ---------- ---  
+DATE_JOIN PRJ_I                                                                 
+--------- -----                                                                 
+       115 Amit       CLRK             106 10-DEC-80      21000       5000 D7   
+10-DEC-04 P4                                                                    
+                                                                                
+       116 Raj        MGR              150 02-OCT-90      35000       5000 D8   
+10-DEC-05 P5                                                                    
+                                                                                
+       117 Sahil      CLRK             116 04-FEB-82      30000       4000 D1   
+03-JAN-00 P3                                                                    
+                                                                                
+
+15 rows selected.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> desc dept
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ DNO                                                VARCHAR2(3)
+ DNAME                                              VARCHAR2(10)
+ LOCATION                                           VARCHAR2(9)
+ DEPT_BUDGET                                        NUMBER(7)
+
+SQL> select * from dept;
+
+DNO DNAME      LOCATION  DEPT_BUDGET                                            
+--- ---------- --------- -----------                                            
+D1  Marketing  CHN            500000                                            
+D2  Research   MNG            300000                                            
+D3  IT         BNG            400000                                            
+D4  HR         BNG            200000                                            
+D5  Accounts   BNG            500000                                            
+D6  Corporate  HYD            700000                                            
+D7  Sale       BNG            500000                                            
+D8  Develper   HYD            500000                                            
+
+8 rows selected.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> delete from dept where dname='Accounts';
+
+1 row deleted.
+
+SQL> select * from dept;
+
+DNO DNAME      LOCATION  DEPT_BUDGET                                            
+--- ---------- --------- -----------                                            
+D1  Marketing  CHN            500000                                            
+D2  Research   MNG            300000                                            
+D3  IT         BNG            400000                                            
+D4  HR         BNG            200000                                            
+D6  Corporate  HYD            700000                                            
+D7  Sale       BNG            500000                                            
+D8  Develper   HYD            500000                                            
+
+7 rows selected.
+
+SQL> rollback;
+
+Rollback complete.
+
+SQL> select * from dept;
+
+DNO DNAME      LOCATION  DEPT_BUDGET                                            
+--- ---------- --------- -----------                                            
+D1  Marketing  CHN            500000                                            
+D2  Research   MNG            300000                                            
+D3  IT         BNG            400000                                            
+D4  HR         BNG            200000                                            
+D5  Accounts   BNG            500000                                            
+D6  Corporate  HYD            700000                                            
+D7  Sale       BNG            500000                                            
+D8  Develper   HYD            500000                                            
+
+8 rows selected.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> desc emp
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPNO                                     NOT NULL NUMBER(4)
+ ENAME                                              VARCHAR2(10)
+ JOB                                                VARCHAR2(9)
+ MGRID                                              NUMBER(4)
+ DATE_BIRTH                                         DATE
+ SAL                                                NUMBER(7,2)
+ COMM                                               NUMBER(7,2)
+ DEPTNO                                             VARCHAR2(3)
+ DATE_JOIN                                          DATE
+ PRJ_ID                                             VARCHAR2(5)
+
+SQL> commit;
+
+Commit complete.
+
+SQL> delete from emp where empno = 125 and prj_id = 'P2';
+delete from emp where empno = 125 and prj_id = 'P2'
+*
+ERROR at line 1:
+ORA-02292: integrity constraint (MCA180.MGR_FK_EMPNO_CONS) violated - child 
+record found 
+
+
+SQL> commit;
+
+Commit complete.
+
+SQL> desc emp
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPNO                                     NOT NULL NUMBER(4)
+ ENAME                                              VARCHAR2(10)
+ JOB                                                VARCHAR2(9)
+ MGRID                                              NUMBER(4)
+ DATE_BIRTH                                         DATE
+ SAL                                                NUMBER(7,2)
+ COMM                                               NUMBER(7,2)
+ DEPTNO                                             VARCHAR2(3)
+ DATE_JOIN                                          DATE
+ PRJ_ID                                             VARCHAR2(5)
+
+SQL> desc proj
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ DNO                                       NOT NULL VARCHAR2(3)
+ PRJ_NO                                    NOT NULL VARCHAR2(5)
+ PRJ_NAME                                           VARCHAR2(10)
+ PRJ_CREDIT                                         NUMBER(2)
+ STRT_DATE                                          DATE
+ END_DATE                                           DATE
+ PRJ_FUND                                           NUMBER(7)
+
+SQL> desc dept
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ DNO                                                VARCHAR2(3)
+ DNAME                                              VARCHAR2(10)
+ LOCATION                                           VARCHAR2(9)
+ DEPT_BUDGET                                        NUMBER(7)
+
+SQL> select * from proj;
+
+DNO PRJ_N PRJ_NAME   PRJ_CREDIT STRT_DATE END_DATE    PRJ_FUND                  
+--- ----- ---------- ---------- --------- --------- ----------                  
+D1  P1    bank                4 10-JAN-20 14-DEC-20     400000                  
+D2  P1    atm                 2 15-JAN-20 16-JUL-20     200000                  
+D3  P2    insurance           3 30-MAR-20 25-NOV-20     300000                  
+D1  P3    credit              5 22-JUL-20 28-AUG-20     500000                  
+D4  P2    upi                 7 29-AUG-20 28-DEC-20     700000                  
+D7  P4    loan                2 12-APR-20 19-OCT-20     200000                  
+D8  P5    ios app             3 15-MAR-20 19-NOV-20     300000                  
+
+7 rows selected.
+
+SQL> update proj set dno='D5' where dno='D1' and prj_no='P1';
+update proj set dno='D5' where dno='D1' and prj_no='P1'
+*
+ERROR at line 1:
+ORA-02292: integrity constraint (MCA180.SYS_C0062781) violated - child record 
+found 
+
+
+SQL> update emp set job='MGR', sal=35000, mgrid=111 where empno=123;
+
+1 row updated.
+
+SQL> update emp set comm = 10000 where job = 'MGR';
+
+4 rows updated.
+
+SQL> select * from emp;
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP  
+---------- ---------- --------- ---------- --------- ---------- ---------- ---  
+DATE_JOIN PRJ_I                                                                 
+--------- -----                                                                 
+       101 Ravi       MGR              111 10-OCT-85      32000      10000 D1   
+02-OCT-01 P1                                                                    
+                                                                                
+       102 Raviraj    CLRK             106 10-DEC-85      24000       8000 D1   
+12-NOV-00 P3                                                                    
+                                                                                
+       111 Raghu      GM               150 10-DEC-74      45000      15000 D2   
+03-DEC-85 P1                                                                    
+                                                                                
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP  
+---------- ---------- --------- ---------- --------- ---------- ---------- ---  
+DATE_JOIN PRJ_I                                                                 
+--------- -----                                                                 
+       150 Saket      CEO                  10-DEC-70      60000      20000 D1   
+03-DEC-90 P1                                                                    
+                                                                                
+       103 Raj        CLRK             111 10-DEC-80      21000       5000 D1   
+02-OCT-01 P1                                                                    
+                                                                                
+       133 Suraj      CLRK             111 02-OCT-80      25000       3000 D1   
+02-OCT-02 P3                                                                    
+                                                                                
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP  
+---------- ---------- --------- ---------- --------- ---------- ---------- ---  
+DATE_JOIN PRJ_I                                                                 
+--------- -----                                                                 
+       125 Manu       A.MGR            150 10-DEC-80      30000       6000 D4   
+02-OCT-02 P2                                                                    
+                                                                                
+       104 Rohan      CLRK             125 02-OCT-80      26000       5000 D2   
+02-OCT-05 P1                                                                    
+                                                                                
+       106 Sachin     MGR              111 02-OCT-86      36000      10000 D2   
+02-OCT-00 P1                                                                    
+                                                                                
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP  
+---------- ---------- --------- ---------- --------- ---------- ---------- ---  
+DATE_JOIN PRJ_I                                                                 
+--------- -----                                                                 
+       123 Mahesh     MGR              111 10-DEC-74      35000      10000 D3   
+02-OCT-02 P2                                                                    
+                                                                                
+       108 Rajat      CLRK             106 10-DEC-70      23000       4000 D4   
+02-OCT-85 P2                                                                    
+                                                                                
+       109 Arya       CLRK             111 10-DEC-80      26000       3000 D7   
+02-OCT-01 P4                                                                    
+                                                                                
+
+     EMPNO ENAME      JOB            MGRID DATE_BIRT        SAL       COMM DEP  
+---------- ---------- --------- ---------- --------- ---------- ---------- ---  
+DATE_JOIN PRJ_I                                                                 
+--------- -----                                                                 
+       115 Amit       CLRK             106 10-DEC-80      21000       5000 D7   
+10-DEC-04 P4                                                                    
+                                                                                
+       116 Raj        MGR              150 02-OCT-90      35000      10000 D8   
+10-DEC-05 P5                                                                    
+                                                                                
+       117 Sahil      CLRK             116 04-FEB-82      30000       4000 D1   
+03-JAN-00 P3                                                                    
+                                                                                
+
+15 rows selected.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> spool off;

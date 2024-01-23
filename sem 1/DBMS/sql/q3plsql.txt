@@ -1,0 +1,10 @@
+set serveroutput on
+declare
+	v_dept dept%rowtype;
+begin
+	select * into v_dept from dept where dno='D1';
+	dbms_output.put_line(v_dept.dno);
+	dbms_output.put_line(v_dept.dname);
+	dbms_output.put_line(v_dept.location);
+end;
+/

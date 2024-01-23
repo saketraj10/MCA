@@ -1,0 +1,82 @@
+SQL> create table marks (regno number(3), mark1 number(3) check(mark1>=0 AND mark1 <=100), mark2 number(3) check(marks between 0 AND 100), total number(3), grade char(2) check(grade in('A+', 'A', 'B', 'C', 'D', 'E', 'F')));
+create table marks (regno number(3), mark1 number(3) check(mark1>=0 AND mark1 <=100), mark2 number(3) check(marks between 0 AND 100), total number(3), grade char(2) check(grade in('A+', 'A', 'B', 'C', 'D', 'E', 'F')))
+                                                                                                                                    *
+ERROR at line 1:
+ORA-02438: Column check constraint cannot reference other columns 
+
+
+SQL> create table marks (regno number(3), mark1 number(3) check(mark1>=0 AND mark1 <=100), mark2 number(3) check(marks between 0 AND 100), total number(3), grade char(2) check(grade in('A+', 'A', 'B', 'C', 'D', 'E', 'F')));
+create table marks (regno number(3), mark1 number(3) check(mark1>=0 AND mark1 <=100), mark2 number(3) check(marks between 0 AND 100), total number(3), grade char(2) check(grade in('A+', 'A', 'B', 'C', 'D', 'E', 'F')))
+                                                                                                                                    *
+ERROR at line 1:
+ORA-02438: Column check constraint cannot reference other columns 
+
+
+SQL> create table marks (regno number(3), mark1 number(3) check(mark1>=0 AND mark1 <=100), mark2 number(3) check(marks between 0 AND 100), total number(3), grade char(2) check(grade IN ('A+', 'A', 'B', 'C', 'D', 'E', 'F')));
+create table marks (regno number(3), mark1 number(3) check(mark1>=0 AND mark1 <=100), mark2 number(3) check(marks between 0 AND 100), total number(3), grade char(2) check(grade IN ('A+', 'A', 'B', 'C', 'D', 'E', 'F')))
+                                                                                                                                    *
+ERROR at line 1:
+ORA-02438: Column check constraint cannot reference other columns 
+
+
+SQL> create table marks (regno number(3), mark1 number(3) check(mark1>=0 AND mark1 <=100), mark2 number(3) check(marks2 between 0 AND 100), total number(3), grade char(2) check(grade in('A+', 'A', 'B', 'C', 'D', 'E', 'F')));
+create table marks (regno number(3), mark1 number(3) check(mark1>=0 AND mark1 <=100), mark2 number(3) check(marks2 between 0 AND 100), total number(3), grade char(2) check(grade in('A+', 'A', 'B', 'C', 'D', 'E', 'F')))
+                                                                                                                                     *
+ERROR at line 1:
+ORA-02438: Column check constraint cannot reference other columns 
+
+
+SQL> create table marks (regno number(3), mark1 number(3) check(mark1>=0 AND mark1 <=100), mark2 number(3) check(mark2 between 0 AND 100), total number(3), grade char(2) check(grade in('A+', 'A', 'B', 'C', 'D', 'E', 'F')));
+
+Table created.
+
+SQL> insert into marks values (100,108, 78, null, 'A');
+insert into marks values (100,108, 78, null, 'A')
+*
+ERROR at line 1:
+ORA-02290: check constraint (MCA180.SYS_C0059885) violated 
+
+
+SQL> drop marks;
+drop marks
+     *
+ERROR at line 1:
+ORA-00950: invalid DROP option 
+
+
+SQL> drop marks
+  2  
+SQL> drop table marks;
+
+Table dropped.
+
+SQL> create table marks(regno number(3), mark1 number(3) constraint range_mark1 check(mark1>=0 AND mark1<=100), mark2 number(3) constraint range_mark2 check(mark2 between 0 AND 100), total number(3), grade char(2) constraint range_grade check(grade in ('A+', 'A', 'B', 'C', 'D', 'E', 'F')));
+
+Table created.
+
+SQL> insert into marks values (100,108, 78, null, 'A');
+insert into marks values (100,108, 78, null, 'A')
+*
+ERROR at line 1:
+ORA-02290: check constraint (MCA180.RANGE_MARK1) violated 
+
+
+SQL> create table course (courseid varchar(10) constraint courseid_prefix check (courseid like 'MCA%'), sem number(1) constraint valid_semester check(sem between check(sem between 1 AND 8), credits number(2));
+create table course (courseid varchar(10) constraint courseid_prefix check (courseid like 'MCA%'), sem number(1) constraint valid_semester check(sem between check(sem between 1 AND 8), credits number(2))
+                                                                                                                                                             *
+ERROR at line 1:
+ORA-00936: missing expression 
+
+
+SQL> create table course (courseid varchar(10) constraint courseid_prefix check (courseid like 'MCA%'), sem number(1) constraint valid_semester check(sem between 1 AND 8), credits number(2));
+
+Table created.
+
+SQL> insert into course values('ABC123', 4, 36);
+insert into course values('ABC123', 4, 36)
+*
+ERROR at line 1:
+ORA-02290: check constraint (MCA180.COURSEID_PREFIX) violated 
+
+
+SQL> spool off;

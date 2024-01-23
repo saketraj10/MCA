@@ -1,0 +1,36 @@
+create table number_table(num number(10));
+
+set serveroutput on
+declare
+	i number_table.num%type:=1;
+begin
+	loop
+		insert into number_table values(i);
+		i:=i+1;
+		exit when i>10;
+	end loop;
+end;
+/
+
+
+set serveroutput on
+declare
+	i number_table.num%type;
+begin
+	for i in 1..10 loop
+		insert into number_table values(i);
+	end loop;
+end;
+/
+
+set serveroutput on
+declare
+	ten number:=10;
+	i number_table.num%type:=1;
+begin
+	while i<=ten loop
+		insert into number_table values(i);
+		i:=i+1;
+	end loop;
+end;
+/

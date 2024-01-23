@@ -1,0 +1,33 @@
+SQL> alter table proj add primary key(dno, prj_no);
+
+Table altered.
+
+
+SQL> alter table emp add prj_id varchar(5);
+
+Table altered.
+
+
+SQL> alter table emp add foreign key(deptno, prj_id) references proj;
+
+Table altered.
+
+SQL> commit;
+
+SQL> alter table emp add constraint VALID_EMPNO_Cons check(empno > 100);
+
+Table altered.
+
+SQL> alter table dept add dept_budget number(7);
+
+Table altered.
+
+SQL> alter table proj add prj_fund number(7);
+
+Table altered.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> spool off

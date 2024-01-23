@@ -1,0 +1,15 @@
+set serveroutput on
+declare
+	cursor cur_emp(v_dept varchar) is select ename, sal from emp where deptno = v_dept order by ename;
+	v_ename emp.ename%type;
+	v_sal emp.sal%type;
+	v_dept emp.deptno%type:='&deptno';
+begin
+	open cur_emp(v_dept);
+	loop
+		fetch cur_emp into v_ename, v_sal;
+		exit when cur_emp%notfound;
+		dbms_output.put_line(v_ename||' draws '||v_sal||' as salary');
+	end loop;
+end;
+/

@@ -1,0 +1,22 @@
+create table circle(radius number(2), area number(5,1), circum number(5,1));
+
+insert into circle (radius) values(2);
+
+insert into circle (radius) values(3);
+
+insert into circle (radius) values(4);
+
+
+set serveroutput on
+declare 
+	v_radius circle.radius%type;
+	v_area circle.area%type;
+	v_circum circle.circum%type;
+begin
+	select radius into v_radius from circle where rownum=1;
+	dbms_output.put_line('Radius= '||v_radius);
+	v_area := 3.14*POWER(v_radius, 2);
+	v_circum:= 2*3.14*v_radius;
+	update circle set area=v_area, circum=v_circum where radius = v_radius;
+end;
+/

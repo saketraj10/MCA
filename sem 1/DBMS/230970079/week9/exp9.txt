@@ -1,0 +1,329 @@
+SQL> set serveroutput on
+SQL> declare
+  2      num number;
+  3      v_empno emp.empno%type;
+  4  begin
+  5      v_empno := &empno;
+  6      select to_number(ename) into num from emp where empno = v_empno;
+  7  exception
+  8      when invalid_number then
+  9      dbms_output.put_line('ename cannot be convert in to number');
+ 10  end;
+ 11  /
+Enter value for empno: 101
+old   5:     v_empno := &empno;
+new   5:     v_empno := 101;
+ename cannot be convert in to number                                            
+
+PL/SQL procedure successfully completed.
+
+SQL> set serveroutput on
+SQL> declare
+  2      v_empno emp.empno%type := &empno;
+  3      v_ename emp.ename%type;
+  4  begin
+  5      select ename into v_ename from emp where empno = v_empno;
+  6      dbms_output.put_line('ename= '||v_ename);
+  7  exception
+  8      when no_data_found then
+  9      dbms_output.put_line('empno does not exists');
+ 10  end;
+ 11  /
+Enter value for empno: 199
+old   2:     v_empno emp.empno%type := &empno;
+new   2:     v_empno emp.empno%type := 199;
+empno does not exists                                                           
+
+PL/SQL procedure successfully completed.
+
+SQL> set serveroutput on
+SQL> declare
+  2      v_ename emp.ename%type;
+  3      v_deptno emp.deptno%type := '&deptno';
+  4  begin
+  5      select ename into v_ename from emp where deptno = v_deptno;
+  6      dbms_output.put_line('ename= '||v_ename);
+  7  exception
+  8      when too_many_rows then
+  9      dbms_output.put_line('there is too many rows');
+ 10  end;
+ 11  /
+Enter value for deptno: D1
+old   3:     v_deptno emp.deptno%type := '&deptno';
+new   3:     v_deptno emp.deptno%type := 'D1';
+there is too many rows                                                          
+
+PL/SQL procedure successfully completed.
+
+SQL> set serveroutput on
+SQL> declare
+  2      v_principle number := &principle;
+  3      v_interest_rate number := &interest_rate;
+  4      v_duration number := &duration;
+  5      v_interest number;
+  6  
+  7      ex_con exception;
+  8  begin
+  9      if v_principle <=1000 or v_interest_rate < 5 or v_duration < 1 then
+ 10          raise ex_con;
+ 11      else
+ 12          v_interest := (v_principle * v_interest_rate * v_duration) / 100;
+ 13  
+ 14          dbms_output.put_line('Principle amount = '|| v_principle);
+ 15          dbms_output.put_line('Interest rate = '|| v_interest_rate);
+ 16          dbms_output.put_line('Duration (in years) = '|| v_duration);
+ 17          dbms_output.put_line('Interest to be paid = '|| v_interest);
+ 18      end if;
+ 19  exception
+ 20      when ex_con then
+ 21          dbms_output.put_line('principle must be less than 1000 or interest rate must be less than 5 or duration must be less than 1');
+ 22  end;
+ 23  /
+Enter value for principle: 200
+old   2:     v_principle number := &principle;
+new   2:     v_principle number := 200;
+Enter value for interest_rate: 6
+old   3:     v_interest_rate number := &interest_rate;
+new   3:     v_interest_rate number := 6;
+Enter value for duration: 3
+old   4:     v_duration number := &duration;
+new   4:     v_duration number := 3;
+principle must be less than 1000 or interest rate must be less than 5 or        
+duration must be less than 1                                                    
+
+PL/SQL procedure successfully completed.
+
+SQL> set serveroutput on
+SQL> declare
+  2      v_principle number := &principle;
+  3      v_interest_rate number := &interest_rate;
+  4      v_duration number := &duration;
+  5      v_interest number;
+  6  
+  7      ex_con exception;
+  8  begin
+  9      if v_principle <=1000 or v_interest_rate < 5 or v_duration < 1 then
+ 10          raise ex_con;
+ 11      else
+ 12          v_interest := (v_principle * v_interest_rate * v_duration) / 100;
+ 13  
+ 14          dbms_output.put_line('Principle amount = '|| v_principle);
+ 15          dbms_output.put_line('Interest rate = '|| v_interest_rate);
+ 16          dbms_output.put_line('Duration (in years) = '|| v_duration);
+ 17          dbms_output.put_line('Interest to be paid = '|| v_interest);
+ 18      end if;
+ 19  exception
+ 20      when ex_con then
+ 21          dbms_output.put_line('principle must be less than 1000 or interest rate must be less than 5 or duration must be less than 1');
+ 22  end;
+ 23  /
+Enter value for principle: 1200
+old   2:     v_principle number := &principle;
+new   2:     v_principle number := 1200;
+Enter value for interest_rate: 6
+old   3:     v_interest_rate number := &interest_rate;
+new   3:     v_interest_rate number := 6;
+Enter value for duration: 3
+old   4:     v_duration number := &duration;
+new   4:     v_duration number := 3;
+Principle amount = 1200                                                         
+Interest rate = 6                                                               
+Duration (in years) = 3                                                         
+Interest to be paid = 216                                                       
+
+PL/SQL procedure successfully completed.
+
+SQL> select empno, ename, sal from emp;
+
+     EMPNO ENAME             SAL                                                
+---------- ---------- ----------                                                
+       101 Ravi            32000                                                
+       102 Raviraj         24000                                                
+       111 Raghu           45000                                                
+       150 Saket           60000                                                
+       103 Raj             21000                                                
+       133 Suraj           25000                                                
+       125 Manu            30000                                                
+       104 Rohan           26000                                                
+       106 Sachin          36000                                                
+       123 Mahesh          35000                                                
+       108 Rajat           23000                                                
+
+     EMPNO ENAME             SAL                                                
+---------- ---------- ----------                                                
+       109 Arya            26000                                                
+       115 Amit            21000                                                
+       116 Raj             35000                                                
+       117 Sahil           30000                                                
+
+15 rows selected.
+
+SQL> set serveroutput on
+SQL> declare
+  2      v_empno emp.empno%type := &empno;
+  3      v_ename emp.ename%type;
+  4      v_sal emp.sal%type;
+  5  
+  6      ex_sal exception;
+  7  begin
+  8      select ename, sal into v_ename, v_sal from emp where empno = v_empno;
+  9      dbms_output.put_line('Empno= '||v_empno);
+ 10      dbms_output.put_line('Name= '||v_ename);
+ 11      dbms_output.put_line('Salary= '||v_sal);
+ 12      if v_sal > 25000 then
+ 13          raise ex_sal;
+ 14      end if;
+ 15      if v_sal < 25000 then
+ 16          update emp set sal = 25000 where empno = v_empno;
+ 17      end if;
+ 18  
+ 19  exception
+ 20      when ex_sal then
+ 21          dbms_output.put_line('salary is greater than 25000');
+ 22      when no_data_found then
+ 23          dbms_output.put_line('empno does not exists');
+ 24  end;
+ 25  /
+Enter value for empno: 196
+old   2:     v_empno emp.empno%type := &empno;
+new   2:     v_empno emp.empno%type := 196;
+empno does not exists                                                           
+
+PL/SQL procedure successfully completed.
+
+SQL> set serveroutput on
+SQL> declare
+  2      v_empno emp.empno%type := &empno;
+  3      v_ename emp.ename%type;
+  4      v_sal emp.sal%type;
+  5  
+  6      ex_sal exception;
+  7  begin
+  8      select ename, sal into v_ename, v_sal from emp where empno = v_empno;
+  9      dbms_output.put_line('Empno= '||v_empno);
+ 10      dbms_output.put_line('Name= '||v_ename);
+ 11      dbms_output.put_line('Salary= '||v_sal);
+ 12      if v_sal > 25000 then
+ 13          raise ex_sal;
+ 14      end if;
+ 15      if v_sal < 25000 then
+ 16          update emp set sal = 25000 where empno = v_empno;
+ 17      end if;
+ 18  
+ 19  exception
+ 20      when ex_sal then
+ 21          dbms_output.put_line('salary is greater than 25000');
+ 22      when no_data_found then
+ 23          dbms_output.put_line('empno does not exists');
+ 24  end;
+ 25  /
+Enter value for empno: 101
+old   2:     v_empno emp.empno%type := &empno;
+new   2:     v_empno emp.empno%type := 101;
+Empno= 101                                                                      
+Name= Ravi                                                                      
+Salary= 32000                                                                   
+salary is greater than 25000                                                    
+
+PL/SQL procedure successfully completed.
+
+SQL> set serveroutput on
+SQL> declare
+  2      v_empno emp.empno%type := &empno;
+  3      v_ename emp.ename%type;
+  4      v_sal emp.sal%type;
+  5  
+  6      ex_sal exception;
+  7  begin
+  8      select ename, sal into v_ename, v_sal from emp where empno = v_empno;
+  9      dbms_output.put_line('Empno= '||v_empno);
+ 10      dbms_output.put_line('Name= '||v_ename);
+ 11      dbms_output.put_line('Salary= '||v_sal);
+ 12      if v_sal > 25000 then
+ 13          raise ex_sal;
+ 14      end if;
+ 15      if v_sal < 25000 then
+ 16          update emp set sal = 25000 where empno = v_empno;
+ 17      end if;
+ 18  
+ 19  exception
+ 20      when ex_sal then
+ 21          dbms_output.put_line('salary is greater than 25000');
+ 22      when no_data_found then
+ 23          dbms_output.put_line('empno does not exists');
+ 24  end;
+ 25  /
+Enter value for empno: 102
+old   2:     v_empno emp.empno%type := &empno;
+new   2:     v_empno emp.empno%type := 102;
+Empno= 102                                                                      
+Name= Raviraj                                                                   
+Salary= 24000                                                                   
+
+PL/SQL procedure successfully completed.
+
+SQL> select empno, ename, sal from emp;
+
+     EMPNO ENAME             SAL                                                
+---------- ---------- ----------                                                
+       101 Ravi            32000                                                
+       102 Raviraj         25000                                                
+       111 Raghu           45000                                                
+       150 Saket           60000                                                
+       103 Raj             21000                                                
+       133 Suraj           25000                                                
+       125 Manu            30000                                                
+       104 Rohan           26000                                                
+       106 Sachin          36000                                                
+       123 Mahesh          35000                                                
+       108 Rajat           23000                                                
+
+     EMPNO ENAME             SAL                                                
+---------- ---------- ----------                                                
+       109 Arya            26000                                                
+       115 Amit            21000                                                
+       116 Raj             35000                                                
+       117 Sahil           30000                                                
+
+15 rows selected.
+
+SQL> set serveroutput on
+SQL> declare
+  2      v_empno emp.empno%type := &empno;
+  3      v_ename emp.ename%type;
+  4      v_sal emp.sal%type;
+  5  
+  6      ex_sal exception;
+  7  begin
+  8      select ename, sal into v_ename, v_sal from emp where empno = v_empno;
+  9      dbms_output.put_line('Empno= '||v_empno);
+ 10      dbms_output.put_line('Name= '||v_ename);
+ 11      dbms_output.put_line('Salary= '||v_sal);
+ 12      if v_sal > 25000 then
+ 13          raise ex_sal;
+ 14      end if;
+ 15      if v_sal < 25000 then
+ 16          update emp set sal = 25000 where empno = v_empno;
+ 17      end if;
+ 18  
+ 19  exception
+ 20      when ex_sal then
+ 21          dbms_output.put_line('salary is greater than 25000');
+ 22      when no_data_found then
+ 23          dbms_output.put_line('empno does not exists');
+ 24  end;
+ 25  /
+Enter value for empno: 102
+old   2:     v_empno emp.empno%type := &empno;
+new   2:     v_empno emp.empno%type := 102;
+Empno= 102                                                                      
+Name= Raviraj                                                                   
+Salary= 25000                                                                   
+
+PL/SQL procedure successfully completed.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> spool off;
