@@ -1,0 +1,70 @@
+#!/bin/bash
+username="Admin"
+password="Admin123"
+while true; do
+read -p "Enter the userid: " u
+read -p "Enter the password: " p
+if [[ ! $(echo "$u" | grep '^[[:upper:]]') || -z $u ]] || [[ ! $(echo "$p" | grep '^[[:upper:]]') || -z $p ]]; then
+echo "User ID and password should not be empty and should start with a capital letter."
+else
+if [ "$u" = "$username" ] && [ "$p" = "$password" ]; then
+echo "Login successful!!"
+break
+else
+echo "Incorrect username or password. Please try again."
+fi
+fi
+done
+contacts_file="contacts.txt"
+echo "Contact Manager Menu"
+function display_menu() {
+    echo "1. Add a new contact"
+    echo "2. Search for a contact by name"
+    echo "3. Delete a contact by name"
+    echo "4. List all contacts"
+    echo "5. Exit"
+}
+function add_contact() {
+    read -p "Enter name: " name
+    read -p "Enter phone number: " phone
+    read -p "Enter email address: " email
+
+    echo "$name, $phone, $email" >> "$contacts_file"
+    echo "Contact added successfully."
+}
+function search_contact() {
+    read -p "Enter name to search: " search_name
+    grep -i "$search_name" "$contacts_file"
+}
+function delete_contact() {
+    read -p "Enter name to delete: " delete_name
+    grep -iv "$delete_name" "$contacts_file"
+    echo "Contact(s) deleted successfully."
+}
+function list_contacts() {
+    sort -t',' -k1 "$contacts_file"
+}
+while true; do
+display_menu
+read -p "Enter your choice (1-5): " choice
+case $choice in
+     1)
+     add_contact;;
+     2)
+     search_contact;;
+     3)
+     delete_contact;;
+     4)
+     list_contacts;;
+     5)
+     echo "Exiting..."
+     exit 0;;
+     *)
+     echo "Invalid choice. Please enter a number between 1 and 5.";;
+    esac
+done
+else
+echo "Incorrect username or password. Please try again."
+fi
+done
+

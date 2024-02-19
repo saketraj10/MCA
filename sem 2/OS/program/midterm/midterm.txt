@@ -1,0 +1,103 @@
+cat > emp.txt
+3, saket, mca, 30000
+2, aditya, mca, 35000
+1, ravi, btech, 25000
+^C
+saketraj@DESKTOP-AR6TVDG:~/practice/midterm$  cat emp.txt
+3, saket, mca, 30000
+2, aditya, mca, 35000
+1, ravi, btech, 25000
+saketraj@DESKTOP-AR6TVDG:~/practice/midterm$ sort emp.txt
+1, ravi, btech, 25000
+2, aditya, mca, 35000
+3, saket, mca, 30000
+saketraj@DESKTOP-AR6TVDG:~/practice/midterm$ cat emp.txt
+3, saket, mca, 30000
+2, aditya, mca, 35000
+1, ravi, btech, 25000
+saketraj@DESKTOP-AR6TVDG:~/practice/midterm$ sort -t ","-k2 emp.txt
+sort: multi-character tab ‘,-k2’
+saketraj@DESKTOP-AR6TVDG:~/practice/midterm$ sort -t "," -k2 emp.txt
+2, aditya, mca, 35000
+1, ravi, btech, 25000
+3, saket, mca, 30000
+saketraj@DESKTOP-AR6TVDG:~/practice/midterm$ sort "," -k2 emp.txt
+sort: cannot read: ,: No such file or directory
+saketraj@DESKTOP-AR6TVDG:~/practice/midterm$ sort -c "," -k2 emp.txt
+sort: extra operand 'emp.txt' not allowed with -c
+saketraj@DESKTOP-AR6TVDG:~/practice/midterm$ sort -r "," -k2 emp.txt
+sort: cannot read: ,: No such file or directory
+saketraj@DESKTOP-AR6TVDG:~/practice/midterm$ sort -rt "," -k2 emp.txt
+3, saket, mca, 30000
+1, ravi, btech, 25000
+2, aditya, mca, 35000
+saketraj@DESKTOP-AR6TVDG:~/practice/midterm$ cut -d',' -f4 emp.txt
+ 30000
+ 35000
+ 25000
+saketraj@DESKTOP-AR6TVDG:~/practice/midterm$ vi f1.sh
+saketraj@DESKTOP-AR6TVDG:~/practice/midterm$ cut -d',' -f3 emp.txt | uniq
+ mca
+ btech
+saketraj@DESKTOP-AR6TVDG:~/practice/midterm$ cut -d',' -f3 emp.txt | uniq | wc -l
+2
+saketraj@DESKTOP-AR6TVDG:~/practice/midterm$ cut -d ',' -f3 emp.txt | uniq
+ mca
+ btech
+saketraj@DESKTOP-AR6TVDG:~/practice/midterm$ cut -d ',' -f3 -f4 emp.txt | uniq
+cut: only one type of list may be specified
+Try 'cut --help' for more information.
+saketraj@DESKTOP-AR6TVDG:~/practice/midterm$ cut -d ',' -{f3,f4} emp.txt | uniq
+cut: only one type of list may be specified
+Try 'cut --help' for more information.
+saketraj@DESKTOP-AR6TVDG:~/practice/midterm$ cut -d ',' -{f3,f4} emp.txt
+cut: only one type of list may be specified
+Try 'cut --help' for more information.
+saketraj@DESKTOP-AR6TVDG:~/practice/midterm$ cut -d ',' -f4 emp.txt
+ 30000
+ 35000
+ 25000
+saketraj@DESKTOP-AR6TVDG:~/practice/midterm$ cut -d ',' -f4 emp.txt > salary.txt
+saketraj@DESKTOP-AR6TVDG:~/practice/midterm$ cat salary.txt
+ 30000
+ 35000
+ 25000
+saketraj@DESKTOP-AR6TVDG:~/practice/midterm$ total=0
+saketraj@DESKTOP-AR6TVDG:~/practice/midterm$ count=0
+saketraj@DESKTOP-AR6TVDG:~/practice/midterm$ cat > avg_sal.sh
+#!/bin/bash
+
+# Initialize variables
+total=0
+count=0
+
+# Loop through each number in the file
+while read -r num; do
+    # Add the number to the total
+    total=$((total + num))
+    # Increment the count
+    ((count++))
+done < file.txt
+
+# Check if count is not zero to avoid division by zero
+if [ $count -ne 0 ]; then
+    # Calculate the average
+    average=$((total / count))
+    echo "Average: $average"
+else
+    echo "No numbers found in the file."
+fi
+^C
+saketraj@DESKTOP-AR6TVDG:~/practice/midterm$ mv salary.txt file.txt
+saketraj@DESKTOP-AR6TVDG:~/practice/midterm$ chmod 744 avg_sal.sh
+saketraj@DESKTOP-AR6TVDG:~/practice/midterm$ ./avg_sal.sh
+Average: 30000
+saketraj@DESKTOP-AR6TVDG:~/practice/midterm$ cat file.txt
+ 30000
+ 35000
+ 25000
+saketraj@DESKTOP-AR6TVDG:~/practice/midterm$ cat >> file.txt
+50000
+^C
+saketraj@DESKTOP-AR6TVDG:~/practice/midterm$ ./avg_sal.sh
+Average: 35000

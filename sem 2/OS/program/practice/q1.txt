@@ -1,0 +1,12 @@
+saketraj@DESKTOP-AR6TVDG:~/practice$ date
+Mon Jan 15 09:37:15 IST 2024
+saketraj@DESKTOP-AR6TVDG:~/practice$ echo $?
+0
+saketraj@DESKTOP-AR6TVDG:~/practice$ data
+Command 'data' not found, did you mean:
+  command 'date' from deb coreutils (8.32-4.1ubuntu1)
+  command 'dat' from deb liballegro4-dev (2:4.4.3.1-2)
+Try: sudo apt install <deb name>
+saketraj@DESKTOP-AR6TVDG:~/practice$ echo $?
+127
+saketraj@DESKTOP-AR6TVDG:~/practice$

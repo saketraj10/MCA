@@ -1,0 +1,220 @@
+mca253@telnet:~/230970079/week2$ ls
+practice  q1a.sh  q1b.sh  q1c.sh  Ubuntu.txt
+mca253@telnet:~/230970079/week2$ cat q1a.sh
+#!/bin/bash
+echo "enter the value x "
+read x
+echo "enter the value y "
+read y
+z=$[ $x + $y ]
+echo "x + y = $z"
+z=$[ $x - $y ]
+echo "x - y = $z"
+z=$[ $x * $y ]
+echo "x * y = $z"
+z=$[ $x / $y ]
+echo "x / y = $z"
+
+
+
+./q1a.sh
+enter the value x
+10
+enter the value y
+2
+x + y = 12
+x - y = 8
+x * y = 20
+x / y = 5
+
+
+
+1 b)
+mca253@telnet:~/230970079/week2$ cat q1b.sh
+#!/bin/bash
+echo "enter the filename for display its attributes and content"
+read a
+if [ -f $a ]; then
+        wc $a
+        cat $a
+else
+        echo "file not exits"
+fi
+
+./q1b.sh
+enter the filename for display its attributes and content
+Linux.txt
+  6 144 892 Linux.txt
+Looking into the Linux kernel
+The core of the Linux system is the kernel. The kernel controls all of the hardware and software on the computer system, allocating hardware when necessary, and executing software when required.
+
+If you’ve been following the Linux world at all, no doubt you’ve heard the name Linus Torvalds. Linus is the person responsible for creating the first Linux kernel software while he was a student at the University of Helsinki. He intended it to be a copy of the Unix system, at the time a popular operating system used at many universities.
+
+After developing the Linux kernel, Linus released it to the Internet community and solicited suggestions for improving it. This simple process started a revolution in the world of computer operating systems. Soon Linus was receiving suggestions from students as well as professional programmers from around the world.
+
+
+1 c)
+
+cat q1c.sh
+#!/bin/bash
+echo "enter the filename "
+read a
+if [ -f $a ]; then
+        echo "enter the filename which you want to copy the content of above file"
+        read b
+        echo "enter the filename which you want to rename of the above file"
+        read c
+
+        cp "$a" "$b"
+        mv "$b" "$c"
+else
+        echo "$a file not exits"
+fi
+
+
+./q1c.sh
+enter the filename
+Linux.txt
+enter the filename which you want to copy the content of above file
+os.txt
+enter the filename which you want to rename of the above file
+Ubuntu.txt
+
+
+2 d)
+
+./q2d.sh
+enter a number:
+8
+even
+saketraj@DESKTOP-AR6TVDG:~/practice/week2$ cat q2d.sh
+#!/bin/bash
+echo "enter a number: "
+read num
+
+if [ $((num % 2)) -eq 0 ]
+then
+        echo "even"
+else
+        echo "odd"
+fi
+
+
+2 e)
+
+./q2e.sh
+enter the first number:
+4
+enter the second number:
+7
+4 less than the 7 by 3
+
+saketraj@DESKTOP-AR6TVDG:~/practice/week2$ cat q2e.sh
+#!/bin/bash
+echo "enter the first number: "
+read num1
+echo "enter the second number: "
+read num2
+if [ $num1 -eq $num2 ]
+then
+        echo "both numbers are equal"
+elif [ $num1 -gt $num2 ]
+then
+        diff=$((num1-num2))
+        echo "$num1 greater than the $num2 by $diff"
+else
+        diff=$((num2-num1))
+        echo "$num1 less than the $num2 by $diff"
+fi
+
+
+
+2 f)
+
+./q2f.sh
+enter the first number:
+3
+enter the second number:
+8
+numbers between 3 and 8:
+3
+4
+5
+6
+7
+8
+sum of the numbers: 33
+saketraj@DESKTOP-AR6TVDG:~/practice/week2$ cat q2f.sh
+#!/bin/bash
+
+echo "enter the first number: "
+read start
+
+echo "enter the second number: "
+read end
+
+echo "numbers between $start and $end: "
+current=$start
+sum=0
+
+while [  $current -le $end ] ; do
+        echo $current
+        current=$((current + 1))
+done
+
+current=$start
+until [ $current -gt $end ]
+do
+        sum=$((sum + current))
+        current=$((current + 1))
+done
+
+echo "sum of the numbers: $sum"
+
+
+3 g)
+
+
+mca253@telnet:~/230970079/week2$ ./q3g.sh
+enter a number:
+5
+the number is non-zero
+mca253@telnet:~/230970079/week2$ cat q3g.sh
+#!/bin/bash
+
+echo "enter a number: "
+read num
+
+case $num in
+        0)
+                echo "the number is zero";;
+        *)
+                echo "the number is non-zero";;
+esac
+
+
+
+3 h)
+
+#!/bin/bash
+
+echo "enter a character: "
+read char
+
+case $char in
+        [[:upper:]])
+                echo "upper-case alphabet";;
+        [[:lower:]])
+                echo "lower-case alphabet";;
+        [0-9])
+                echo "digit";;
+        *)
+                echo "special character";;
+esac
+
+
+
+./q3h.sh
+enter a character:
+h
+lower-case alphabet

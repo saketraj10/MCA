@@ -1,0 +1,133 @@
+First Make file employees.txt and copy this
+
+EmployeeId,firstName,lastName,DepartmentName,Salary
+1,shubham,Bhardwaj,D1,20000
+2,Shivam,Bhardwaj,D2,40000
+3,Himanshu,Swaraj,D3,50000
+4,Lalit,B Sai,D1,10000
+5,Blesson,Sam,D3,30000
+6,Armaan,Tiwari,D4,50000
+
+
+
+Q1) write a shell script to accept username and password from the user .
+a) make sure that username and password  has at least 4 numeric values with some character and is non-empty. if not, display the message "invalid Username or Password" and again prompt to enter the username and password.
+
+b) make a file employees.txt. write the detail of EmployeeId,firstName,lastName,DepartmentName,Salary . only if the username is "mca2024" and password is "mca2024" grant the user access to the Menu in Q2. Otherwise, display the message "invalid credentials" and again prompt to enter the username and password.
+
+Q2) once the username and password is correct for Q1), display the following:
+contact Manager Menu
+1.  count how many employee 
+2. count department name without duplication
+3. calculate average salary
+4. Exit
+Enter your choice(1-4)
+
+
+Solution
+
+#!/bin/bash
+
+# Function to display the Menu
+display_menu() {
+    echo "Employee Manager Menu"
+    echo "1. Count how many employees"
+    echo "2. Count department names without duplication"
+    echo "3. Calculate average salary"
+    echo "4. Exit"
+}
+
+# Function to count the number of employees
+count_employees() {
+    echo "Counting how many employees..."
+    # Count the number of lines in the employees file, excluding the header line
+    num_employees=$(wc -l < <(tail -n +2 employees.txt))
+    echo "Total number of employees: $num_employees"
+}
+
+
+
+# Function to count department names without duplication
+count_departments() {
+    echo "Counting department names without duplication..."
+    # Extract department names from the employees file, excluding the header line
+    unique_departments=$(awk -F ',' 'NR > 1 {print $4}' employees.txt | sort | uniq)
+    
+    # Count the number of unique department names
+    num_departments=$(echo "$unique_departments" | wc -l)
+    
+    # Display the unique department names and the total count
+    echo "Unique department names:"
+    echo "$unique_departments"
+    echo "Total number of unique departments: $num_departments"
+}
+
+
+
+# Function to calculate the average salary
+calculate_average_salary() {
+    echo "Calculating average salary..."
+    # Extract salary values from the employees file
+    salaries=$(awk -F ',' '{print $5}' employees.txt)
+    
+    # Initialize variables for total salary and number of employees
+    total_salary=0
+    num_employees=0
+    
+    # Loop through each salary value
+    for salary in $salaries; do
+        # Increment the total salary by the current salary value
+        ((total_salary += salary))
+        # Increment the number of employees
+        ((num_employees++))
+    done
+    
+    # Calculate the average salary
+    if [ "$num_employees" -gt 0 ]; then
+        average_salary=$(bc <<< "scale=2; $total_salary / $num_employees")
+        echo "Average salary: $average_salary"
+    else
+        echo "No employees found."
+    fi
+}
+
+
+# Main function
+main() {
+    while true; do
+        # Prompt the user to enter username
+        echo "Enter Username: "
+        read username
+
+        # Prompt the user to enter password
+        echo "Enter Password: "
+        read -s password  # -s option hides the password input
+
+        # Check if username and password have at least 4 numeric values with some character and are non-empty
+        if [[ ! $username =~ ^.*[a-zA-Z]+.*[0-9]{4,}.*$ || ! $password =~ ^.*[a-zA-Z]+.*[0-9]{4,}.*$ || -z $username || -z $password ]]; then
+            echo "Invalid Username or Password. Username and Password must contain at least 4 numeric values with some character and cannot be empty."
+        else
+            # Check if the username is "mca2024" and password is "mca2024"
+            if [ "$username" == "mca2024" ] && [ "$password" == "mca2024" ]; then
+                echo "Access Granted. Welcome to the Menu."
+                display_menu
+                while true; do
+                    echo "Enter your choice(1-4): "
+                    read choice
+                    case $choice in
+                        1) count_employees;;
+                        2) count_departments;;
+                        3) calculate_average_salary;;
+                        4) echo "Exiting..."; exit;;
+                        *) echo "Invalid choice. Please enter a number between 1 and 4.";;
+                    esac
+                done
+            else
+                echo "Invalid credentials. Please try again."
+            fi
+        fi
+    done
+}
+
+# Call the main function
+main

@@ -1,0 +1,110 @@
+
+1 a)
+
+cut -b 2-6 hello.txt
+or
+cut -c 2-6 hello.txt
+
+
+ello
+ow ar
+
+sort os.txt
+
+tr?
+
+
+
+1 b)
+
+grep raj hello.txt
+
+hello saket raj
+
+1c)
+
+head -n 1 hello.txt
+
+hello saket raj
+
+
+tail -n 1 hello.txt
+
+how are you
+
+
+
+cat q2d.sh
+#!/bin/bash
+
+echo "All the files starting with the word 'hello': "
+files=$(ls | grep '^hello*')
+for file in $files; do
+    if [ -f "$file" ]; then
+        echo "$file"
+    fi
+done
+
+./q2d.sh
+All the files starting with the word 'hello':
+hello.txt
+
+
+cat q2e.sh
+#!/bin/bash
+
+echo "enter the filename"
+read file
+
+if [ -f $file ]; then
+        echo "enter the pattern"
+        read pattern
+        pat=$( grep -c $pattern $file )
+        if [ $pat -gt 0 ]; then
+                echo "word exit in file"
+        else
+                echo "word does not exit"
+        fi
+else
+        echo "file doesn't exit"
+fi
+
+
+
+./q2e.sh
+enter the filename
+hello.txt
+enter the pattern
+raj
+word exit in file
+
+
+
+cat q2f.sh
+#!/bin/bash
+
+echo "enter the file name"
+read file
+if [ -f $file ]; then
+        user=$( ls -l $file | cut -c 2-4 )
+        group=$( ls -l $file | cut -c 5-7 )
+        other=$( ls -l $file | cut -c 8-10 )
+
+        echo "access permission of users: $user"
+        echo "access permission of group: $group"
+        echo "access permission of other: $other"
+else
+        echo "file doesn't exists"
+fi
+
+
+./q2f.sh
+enter the file name
+hello.txt
+access permission of users: rw-
+access permission of group: rw-
+access permission of other: r--
+
+
+
+

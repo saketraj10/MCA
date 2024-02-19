@@ -1,0 +1,255 @@
+man     an interface to the system reference manuals
+syntax:
+man [option]
+eg:
+man pwd
+
+
+pwd - print name of current/working directory
+
+SYNOPSIS
+       pwd [OPTION]...
+
+DESCRIPTION
+       Print the full filename of the current working directory.
+
+       -L, --logical
+              use PWD from environment, even if it contains symlinks
+
+       -P, --physical
+              avoid all symlinks
+
+       --help display this help and exit
+
+       --version
+              output version information and exit
+
+       If no option is specified, -P is assumed.
+
+       NOTE: your shell may have its own version of pwd, which usually supersedes the version described here.  Please refer to your shell's documentation for details about the options it supports.
+
+AUTHOR
+       Written by Jim Meyering.
+
+
+
+help	display information about builtin commands
+syntax
+       help [OPTION]...
+
+eg:
+help pwd
+
+ pwd - print name of current/working directory
+
+SYNOPSIS
+       pwd [OPTION]...
+
+DESCRIPTION
+       Print the full filename of the current working directory.
+
+       -L, --logical
+              use PWD from environment, even if it contains symlinks
+
+       -P, --physical
+              avoid all symlinks
+
+       --help display this help and exit
+
+
+
+pwd     print the name of the current working directory
+syntax:
+        pwd
+
+eg:
+        pwd
+/home/mca253/230970079/week1
+
+
+mkdir   to make a directories
+syntax:
+        to make 1 directory
+        mkdir directory_name
+
+        to make many directory
+        mkdir directory_name1 directory_name2
+eg:
+        mkdir week1
+
+        mkdir week2 week3
+
+
+
+cd      change the shell working directory
+syntax:
+        cd [directory_path]
+ex:
+        cd ..
+
+        cd week1
+
+
+
+
+rmdir    to remove an empty directory
+syntax:
+        rmdir [directory_name]
+ex:
+        rmdir week1
+
+
+
+ls       to lists files an directories in the current directory
+syntax:
+        ls [option]
+ex:
+        ls
+        or
+        ls -l
+
+
+
+cp       to copies files or directories
+syntax:
+        cp [source] [destination]
+ex:
+        cp saket.txt week2/
+
+
+
+rm       to remove or delete files or directories
+syntax:
+        rm [file]
+ex:
+        rm file1.txt
+
+
+
+
+touch	to creates an empty file or updates the access and midification times of a file
+syntax:
+	touch [file_name]
+ex:
+	touch file.txt
+
+
+
+who	show who is logged on
+syntax:
+	who
+ex:
+	who
+
+
+
+whoami	print effective userid
+syntax:
+	whoami
+ex:
+	whoami
+
+
+
+whatis	to dislpay one-line manual page descriptions
+syntax:
+	whatis [command]
+ex:
+	whatis	
+		whatis what?
+	or
+	whatis cp
+		cp (1)	- copy files and directories
+
+
+date	print or set the system date and time
+syntax:
+	date [OPTION]... [+Format]
+	date[-u|--utc|--universal] [MMDDhhmm[[CC]YY][.ss]]
+ex:
+	date
+		Thrusday 11 January 2024 12:06:51 PM IST
+
+
+
+wc	print newline, word, and byte counts for each file
+syntax:
+	wc[OPTION]... [FILE]...
+	wc[OPTION]... --files0-from=F
+ex:
+	wc file.txt
+		1 3 16 file.txt
+
+
+chown	change file owner and group
+syntax:
+	chown [OPTION]... [OWNER][:[GROUP]] FILE...
+	chown [OPTION]... --reference=RFILE FILE...
+ex:
+	chown user1 file.txt
+
+
+chgrp	change group ownership
+syntax:
+	chgrp [OPTION]... GROUP FILE...
+	chgrp [OPTION]... --reference=RFILE FILE...
+ex:
+	chgrp group1 file.txt
+
+
+chmod	change file mod bits
+syntax:
+	chmod [OPTION]... MODE[.MODE]... FILE...
+	chmod [OPTION]... OCTAL-MODE FILE...
+	chmod [OPTION]... --reference=RFILE FILE...
+ex:
+	chmod 755 file.txt
+
+
+ 
+cat	concatenate files and print on the standard output
+syntax:
+	cat [OPTION]...	[FILE]...
+ex:
+	cat file.txt
+
+
+echo	display a line of text
+syntax:
+	echo [SHORT-OPTION]... [STRING]...
+	echo LONG-OPTION
+ex:
+	echo "hello saket"
+		hello saket
+
+
+*	represents any sequence of characters
+?	represents a single character
+[]	represents a range of characters
+&&	represents logical and(used in command chaining)
+
+
+|	redirects the output of one command as the input to another
+>	redirects output to a file, overwriting its contents
+>>	redirects output to a file, appending to its contents
+<	redirects input from a file to a command
+<<	allows the input of multiple lines directly from the terminal
+
+
+i	enter insert mode
+esc	exit insert mode
+:wq	save changes and exit
+:q!	quit without saving changes
+dd	delete a line
+yy	copy a line
+p	paste the copied line
+
+
+	
+
+
+
+
+
+
+

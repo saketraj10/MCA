@@ -1,0 +1,158 @@
+mkdir OSxxx
+mca253@telnet:~/230970079/week1$ ls
+command.txt  OSxxx
+mca253@telnet:~/230970079/week1$ cd OSxxx/
+mca253@telnet:~/230970079/week1/OSxxx$ mkdir dir1 dir2 dir3 dir4 dir5 dir6 dir7 dir8 dir9 dir10 dir11
+mca253@telnet:~/230970079/week1/OSxxx$ ls
+dir1  dir10  dir11  dir2  dir3  dir4  dir5  dir6  dir7  dir8  dir9
+
+
+
+mkdir TestFolder
+mca253@telnet:~/230970079/week1$ ls
+command.txt  OSxxx  TestFolder
+mca253@telnet:~/230970079/week1$ cd TestFolder/
+mca253@telnet:~/230970079/week1/TestFolder$ ls
+
+
+mca253@telnet:~/230970079/week1$ touch TestFolder/f1 TestFolder/f2 TestFold
+er/f3
+mca253@telnet:~/230970079/week1$ ls
+command.txt  OSxxx  TestFolder
+mca253@telnet:~/230970079/week1$ cd TestFolder/
+mca253@telnet:~/230970079/week1/TestFolder$ ls
+f1  f2  f3
+mca253@telnet:~/230970079/week1$ cd TestFolder/
+mca253@telnet:~/230970079/week1/TestFolder$ ls
+f1  f2  f3
+mca253@telnet:~/230970079/week1/TestFolder$ cat > f1
+hello saket raj, how are you?
+^C
+mca253@telnet:~/230970079/week1/TestFolder$ cat  f1
+hello saket raj, how are you?
+mca253@telnet:~/230970079/week1/TestFolder$ cat > f2
+I am fine. What about yours?
+^C
+mca253@telnet:~/230970079/week1/TestFolder$ cat  f2
+I am fine. What about yours?
+mca253@telnet:~/230970079/week1/TestFolder$ cat > f3
+Also fine. What are you doing nowadays?
+^C
+mca253@telnet:~/230970079/week1/TestFolder$
+mca253@telnet:~/230970079/week1/TestFolder$ cd ..
+mca253@telnet:~/230970079/week1$ cd ..
+mca253@telnet:~/230970079$ ls
+week1  week2  week3  week4  week5  week6
+mca253@telnet:~/230970079$ cd week1
+mca253@telnet:~/230970079/week1$ ls
+command.txt  OSxxx  TestFolder
+mca253@telnet:~/230970079/week1$ cp TestFolder/f1 ./
+mca253@telnet:~/230970079/week1$ ls
+command.txt  f1  OSxxx  TestFolder
+mca253@telnet:~/230970079/week1$ echo "Number of users: $(who | wc -l), Num
+ber of files: $(ls -l | grep "^-" | wc -l)" > user_file_info.txt
+mca253@telnet:~/230970079/week1$ ls
+command.txt  f1  OSxxx  TestFolder  user_file_info.txt
+mca253@telnet:~/230970079/week1$ cat user_file_info.txt
+Number of users: 1, Number of files: 2
+mca253@telnet:~/230970079/week1$ ls -l
+total 20
+-rw-rw-r--  1 mca253 mca253 2037 Jan 10 12:32 command.txt
+-rw-rw-r--  1 mca253 mca253   30 Jan 11 15:17 f1
+drwxrwxr-x 13 mca253 mca253 4096 Jan 10 13:02 OSxxx
+drwxrwxr-x  2 mca253 mca253 4096 Jan 11 15:13 TestFolder
+-rw-rw-r--  1 mca253 mca253   39 Jan 11 15:19 user_file_info.txt
+mca253@telnet:~/230970079/week1$ touch a.txt
+mca253@telnet:~/230970079/week1$ ls -l [aA]
+ls: cannot access '[aA]': No such file or directory
+mca253@telnet:~/230970079/week1$ ls -l [aA]*
+mca253@telnet:~/230970079/week1$ cd TestFolder/
+mca253@telnet:~/230970079/week1/TestFolder$ touch A.txt
+mca253@telnet:~/230970079/week1/TestFolder$ cd ..
+mca253@telnet:~/230970079/week1$ ls -l TestFolder/[aA]*
+-rw-rw-r-- 1 mca253 mca253 0 Jan 11 15:26 TestFolder/A.txt
+mca253@telnet:~/230970079/week1$ ls
+a.txt  command.txt  f1  OSxxx  TestFolder  user_file_info.txt
+mca253@telnet:~/230970079/week1$ echo -e "December\nJanuary\nFebruary\nMarc
+h\nApril\nMay\nJune\nJuly\nAugust\nSeptember\nOctober\nNovember" > month_na
+mes
+mca253@telnet:~/230970079/week1$ ls
+a.txt  command.txt  f1  month_names  OSxxx  TestFolder  user_file_info.txt
+mca253@telnet:~/230970079/week1$ cat month_names
+December
+January
+February
+March
+April
+May
+June
+July
+August
+September
+October
+November
+mca253@telnet:~/230970079/week1$ sort -o month_names month_names
+mca253@telnet:~/230970079/week1$ cat month_names
+April
+August
+December
+February
+January
+July
+June
+March
+May
+November
+October
+September
+mca253@telnet:~/230970079/week1$ head -n 5 month_names
+April
+August
+December
+February
+January
+mca253@telnet:~/230970079/week1$ tail -n 5 month_names
+March
+May
+November
+October
+September
+mca253@telnet:~/230970079/week1$ pwd > file.txt
+mca253@telnet:~/230970079/week1$ cat file.txt
+/home/mca253/230970079/week1
+mca253@telnet:~/230970079/week1$ date >> file.txt
+mca253@telnet:~/230970079/week1$ ls >> file.txt
+mca253@telnet:~/230970079/week1$ cat file.txt
+/home/mca253/230970079/week1
+Fri Jan 12 10:06:10 IST 2024
+a.txt
+command.txt
+f1
+file.txt
+month_names
+OSxxx
+TestFolder
+user_file_info.txt
+
+
+(xiii)
+a)sed -i 's/\*\*\*/ /g' Linux.txt
+
+b):%s/Linux/Ubuntu/g
+
+
+c):wq
+
+d)cat Linux.txt
+
+mca253@telnet:~/230970079/week1$ cat Linux.txt
+
+Looking into the Ubuntu kernel
+The core of the Ubuntu system is the kernel. The kernel controls all of the hardware and software on the computer system, allocating hardware when necessary, and executing software when required.
+***
+If you've been following the Ubuntu world at all, no doubt you've heard the name Linus Torvalds. Linus is the person responsible for creating the first Ubuntu kernel software while he was a student at the University of Helsinki. He intended it to be a copy of the Unix system, at the time a popular operating system used at many universities.
+***
+After developing the Ubuntu kernel, Linus released it to the Internet community and solicited suggestions for improving it. This simple process started a revolution in the world of computer operating systems. Soon Linus was receiving suggestions from students as well as professional programmers from around the world.
+mca253@telnet:~/230970079/week1$ mv Linux.txt Ubuntu.txt
+mca253@telnet:~/230970079/week1$ cp Ubuntu.txt Linux1.txt
+

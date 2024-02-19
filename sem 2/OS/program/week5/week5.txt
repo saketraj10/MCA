@@ -1,0 +1,179 @@
+cat q1a.c
+#include<stdio.h>
+#include<sys/types.h>
+#include<unistd.h>
+int main()
+{
+        pid_t getpid();
+        pid_t getppid();
+        printf("PID = %d\n", getpid());
+        printf("PID = %d\n", getppid());
+
+        return 0;
+}
+saketraj@DESKTOP-AR6TVDG:~/practice/week5$ ./q1a.out
+PID = 1067
+PID = 353
+
+
+
+cat q1c.c
+#include<stdio.h>
+#include<sys/types.h>
+#include<unistd.h>
+int main()
+{
+        pid_t pid;
+        pid = fork();
+        switch(pid)
+        {
+                case 0:
+                        printf("This is a child process pid = %d\n", getpid());
+                        break;
+                case -1:
+                        printf("This child process has not created\n");
+                        break;
+                default:
+                        printf("This is parent process pid = %d\n", getppid());
+        }
+        return 0;
+}
+saketraj@DESKTOP-AR6TVDG:~/practice/week5$ ./q1c.out
+This is parent process pid = 353
+This is a child process pid = 1071
+
+
+
+
+./q1c1.out
+This is a child process pid = 1003
+This is parent process pid = 353
+saketraj@DESKTOP-AR6TVDG:~/practice/week5$ cat q1c1.c
+#include<stdio.h>
+#include<sys/types.h>
+#include<unistd.h>
+#include<sys/wait.h>
+int main()
+{
+        pid_t pid;
+        pid = fork();
+        switch(pid)
+        {
+                case 0:
+                        sleep(10);
+                        printf("This is a child process pid = %d\n", getpid());
+                        break;
+                case -1:
+                        printf("This child process has not created\n");
+                        break;
+                default:
+                        wait(NULL);
+                        printf("This is parent process pid = %d\n", getppid());
+        }
+        return 0;
+}
+
+
+cat q2a.c
+#include<stdio.h>
+#include<sys/types.h>
+#include<unistd.h>
+int main()
+{
+        int pid;
+        int n = fork();
+        if(n==0){
+                printf("this is a child process\n");
+                pid = getpid();
+                printf("process id = %d\n", pid);
+        }
+        else if(n>=1){
+                printf("this is a parent process\n");
+                pid = getpid();
+                printf("process id = %d\n", pid);
+        }
+        else{
+                printf("process creation fail\n");
+        }
+
+        return 0;
+}
+./q2a.out
+this is a parent process
+process id = 1082
+this is a child process
+process id = 1083
+
+
+
+
+
+cat q2b.c
+#include<stdio.h>
+#include<sys/types.h>
+#include<unistd.h>
+#include <stdbool.h>
+int main()
+{
+        int pid;
+        int n;
+        printf("Enter the size of array: ");
+        scanf("%d", &n);
+
+        int arr[n];
+        printf("Enter the elements of array: ");
+        for(int i=0; i<n; i++)
+        {
+                scanf("%d",&arr[i]);
+        }
+
+        pid = fork();
+        if(pid>0)
+        {
+                printf("This is parent: \n");
+                printf("unsorted array: \n");
+                for(int i=0; i<n; i++)
+                        printf("%d\t", arr[i]);
+                printf("\n");
+        }
+        else if(pid==0)
+        {
+                printf("This is child: \n");
+                for(int i=0; i<n-1; i++)
+                {
+                        bool flag = true;
+                        for(int j=0; j<n-1; j++)
+                        {
+                                if(arr[j]>arr[j+1])
+                                {
+                                        int temp = arr[j];
+                                        arr[j] = arr[j+1];
+                                        arr[j+1] = temp;
+                                        flag = false;
+                                }
+                        }
+                        if(flag) break;
+                }
+                printf("sorted array: \n");
+                for(int i=0; i<n; i++)
+                        printf("%d\t", arr[i]);
+                printf("\n");
+        }
+        else
+        {
+                printf("Fail to create a child process");
+        }
+
+        return 0;
+}
+
+
+./q2b.out
+Enter the size of array: 4
+Enter the elements of array: 8 4 2 7
+This is parent:
+unsorted array:
+8       4       2       7
+This is child:
+sorted array:
+2       4       7       8

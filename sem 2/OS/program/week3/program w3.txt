@@ -1,0 +1,234 @@
+cat q1a.sh
+#!/bin/bash
+
+echo "enter the filename"
+read file
+
+if [ -r $file ];
+then
+        echo "file is read mode"
+else
+        echo "file is not in read mode"
+fi
+
+if [ -w $file ];
+then
+        echo "file is write mode"
+else
+        echo "file is not in write mode"
+fi
+
+if [ -x $file ];
+then
+        echo "file is excutable mode"
+else
+        echo "file is not in excutable mode"
+fi
+
+
+./q1a.sh
+enter the filename
+file.txt
+file is read mode
+file is write mode
+file is excutable mode
+
+
+
+cat q1b.sh
+#!/bin/bash
+
+echo "enter filename or directory name"
+read name
+
+if [ -f $name ];
+then
+        echo "$name is file"
+        if [ -s $name ];
+        then
+                echo "$name size greater than zero"
+        else
+                echo "$name size equal to zero"
+        fi
+else
+        echo "$name is not file"
+fi
+
+if [ -d $name ];
+then
+        echo "$name is directory"
+        if [ -s $name ];
+        then
+                echo "$name size greater than zero"
+        else
+                echo "$name size equal to zero"
+        fi
+else
+        echo "$name is not directory"
+fi
+
+if [ -e $name ];
+then
+        echo "$name exits"
+else
+        echo "$name doesn't exits"
+fi
+
+
+./q1b.sh
+enter filename or directory name
+file.txt
+file.txt is file
+file.txt size greater than zero
+file.txt is not directory
+file.txt exits
+
+
+cat q2c.sh
+#!/bin/bash
+
+echo "all the files having read permission"
+
+for file in *; do
+        if [ -f $file ] && [ -r $file ]; then
+               echo $file
+        fi
+done
+
+./q2c.sh
+all the files having read permission
+f1.txt
+file.txt
+q1a.sh
+q1b.sh
+q2c.sh
+q2d.sh
+q2e.sh
+
+
+
+
+./q2d.sh
+enter the filename
+file.txt
+file.txt has read, write and execute permission
+saketraj@DESKTOP-AR6TVDG:~/practice/week3$ cat q2d.sh
+#!/bin/bash
+
+echo "enter the filename"
+read file
+
+if [ -f $file ]; then
+        if [ -r $file ] && [ -w $file ] && [ -x $file ];
+        then
+                echo "$file has read, write and execute permission"
+        else
+                echo "$file has not read, not write and not execute permission"
+        fi
+else
+        echo "$file doesn't exit"
+fi
+
+
+
+
+cat q2e.sh
+#!/bin/bash
+
+echo "enter the file name"
+read file
+
+if [ -f $file ]; then
+        if [ -w $file ]; then
+                echo "enter some new text in the $file"
+                cat >> $file
+        else
+                echo "Error: $file do not have write permission"
+        fi
+else
+        echo "Error: $file doesn't exits"
+fi
+
+
+./q2e.sh
+enter the file name
+file.txt
+enter some new text in the file.txt
+what are you doing?
+^C
+
+
+
+
+
+cat q3f.sh
+#!/bin/bash
+
+countOF=0
+countHF=0
+countD=0
+countSD=0
+for val in *
+do
+        if [ -f $val ]
+        then
+                countOF=`expr $countOF + 1`
+        elif [ -d $val ]
+        then
+                countD=`expr $countD + 1`
+                cd $val
+                for val1 in *
+                do
+                        if [ -d $val1 ]
+                        then
+                                countSD=`expr $countSD + 1`
+                        fi
+                done
+                cd ..
+        fi
+done
+for val2 in `ls -a`
+do
+        if [ -f $val2 ]
+        then
+                countHF=`expr $countHF + 1`
+        fi
+done
+countHF=`expr $countHF - $countOF`
+echo "Number of Ordinary Files: $countOF"
+echo "Number of Hidden Files: $countHF"
+echo "Number of Directories: $countD"
+echo "Number of Sub Directories: $countSD"
+
+
+
+./q3f.sh
+Number of Ordinary Files: 8
+Number of Hidden Files: 0
+Number of Directories: 0
+Number of Sub Directories: 0
+
+
+
+
+cat q3g.sh
+#!/bin/bash
+
+for file in *; do
+        if [ -f $file ]; then
+                if [ -s $file ]; then
+                echo $file
+                fi
+        fi
+done
+
+
+./q3g.sh
+file.txt
+q1a.sh
+q1b.sh
+q2c.sh
+q2d.sh
+q2e.sh
+q3f.sh
+q3g.sh
