@@ -1,0 +1,19 @@
+check whether c is in the middle or not
+use stack and check input is valid or not 
+i)
+w and wr is varible 
+input w and wr as
+w = ab
+wr = ba
+output :
+The string is abcba , it is valid sting w=ab and wr = ba
+ii)
+w = ab
+wr = de
+output:
+The string is abcde, it is invalid becoz w=ab and wr = de
+
+note:
+no stl function
+no string
+only char array
