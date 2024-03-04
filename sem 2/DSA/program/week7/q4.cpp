@@ -24,7 +24,7 @@ class Queue
     void enqueue(int val){
         Node* temp = new Node(val);
         if(size==0) head = tail = temp;
-        {
+        else{
             tail->next = temp;
             tail = temp;
         }
@@ -92,16 +92,16 @@ int main()
                 break;
             case 3:
                 if(q.front()!=-1){
-                    cout<<"Top element: "<<q.front()<<endl;
+                    cout<<"Front element: "<<q.front()<<endl;
                 }
                 break;
             case 4:
                 if(q.back()!=-1){
-                    cout<<"Top element: "<<q.back()<<endl;
+                    cout<<"Back element: "<<q.back()<<endl;
                 }
                 break;
             case 5:
-                cout<<"Display Stack: "<<endl;
+                cout<<"Display Queue: "<<endl;
                 q.display();
                 break;
             case 0:
