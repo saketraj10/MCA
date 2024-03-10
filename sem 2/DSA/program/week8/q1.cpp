@@ -1,3 +1,7 @@
+// Implement a sorted doubly linked list. Include the following options: inserting a node, deleting a node and displaying the list in both directions.
+// Saket Raj
+// 230970079
+// 04-03-2024
 #include<iostream>
 using namespace std;
 class Node{

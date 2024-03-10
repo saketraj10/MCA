@@ -1,3 +1,7 @@
+// Create a binary search tree and traverse it in preorder, inorder and postorder traversal methods
+// Saket Raj
+// 230970079
+// 04-03-2024
 #include<iostream>
 using namespace std;
 class TreeNode{
