@@ -26,31 +26,35 @@ int main()
         cout<<"process id \t Turnaround Time \t Waiting Time"<<endl;
         for(time=0; remain!=n; time++)
         {
+            smallest = -1;
             for(i=0; i<n; i++)
             {
-                if(at[i]<=time && rt[i])
+                if(at[i]<=time && rt[i]>0)
                 {
-                    smallest = i;
+                    if(smallest == -1 || rt[i]<rt[smallest]){
+                        smallest = i;
+                    }
                 }
             }
-            rt[smallest]--;
-            if(rt[smallest]==0)
-            {
-                remain++;
-                completionTime = time+1;
-                cout<<smallest+1<<"\t"<<completionTime-at[smallest]<<"\t"<<completionTime-bt[smallest]-at[smallest];
-                sum_wait = sum_wait + completionTime - bt[smallest]-at[smallest];
-                sum_turnaround = sum_turnaround + completionTime - at[smallest];
+            if(smallest!=-1){
+                rt[smallest]--;
+                if(rt[smallest]==0)
+                {
+                    remain++;
+                    completionTime = time+1;
+                    wt[smallest] = completionTime - bt[smallest] - at[smallest];
+                    tat[smallest] = completionTime - at[smallest];
+                    sum_wait = sum_wait + completionTime - bt[smallest]-at[smallest];
+                    sum_turnaround = sum_turnaround + completionTime - at[smallest];
+                    cout<<p[smallest]<<"\t\t"<<tat[smallest]<<"\t\t\t"<<wt[smallest]<<endl;
+                }
             }
-            cout<<endl;
         }
         cout<<endl;
         awt = sum_wait/n;
         atat = sum_turnaround/n;
         cout<<"avg waiting time: "<<awt<<endl;
         cout<<"avg turnaround time: "<<atat<<endl;
-
-
 
         return 0;
 }

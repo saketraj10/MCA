@@ -79,7 +79,7 @@ int main()
     {
         tat[i] = ct[i] - at[i];
         wt[i] = tat[i] - bt[i];
-        cout<<p[i]<<"\t"<<ct[i]<<"\t"<<wt[i]<<"\t"<<tat[i]<<endl;
+        cout<<p[i]<<"\t\t\t"<<ct[i]<<"\t\t\t"<<wt[i]<<"\t\t"<<tat[i]<<endl;
 
     }
 

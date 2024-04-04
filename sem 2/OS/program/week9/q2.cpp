@@ -1,7 +1,5 @@
 #include<iostream>
 using namespace std;
-#include<iostream>
-using namespace std;
 bool isCheck(bool processCompletion[], int l)
 {
         if(processCompletion[l]==false) return true;
@@ -130,7 +128,5 @@ int main()
         {
                 cout<<"System is not in safe state"<<endl;
         }
-
-
         return 0;
 }
