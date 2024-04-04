@@ -10,10 +10,10 @@ int main()
         int n,r;
         cout<<"Enter the no of processes: ";
         cin>>n;
-        cout<<"Enter the no of recources: ";
+        cout<<"Enter the no of resources: ";
         cin>>r;
         int totalr[r];
-        cout<<"Enter the total recources: ";
+        cout<<"Enter the total resources: ";
         for(int i=0; i<r; i++)
         {
                 cin>>totalr[i];
