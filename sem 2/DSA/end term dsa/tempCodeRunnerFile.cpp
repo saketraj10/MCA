@@ -1,0 +1,2 @@
+void deleteAtIdx(int idx){
+       
