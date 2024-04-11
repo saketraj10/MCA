@@ -53,11 +53,6 @@ int main(){
         if(direction=="right" || direction=="RIGHT" || direction=="R" || direction=="r"){
             flag = false;
         }
-
-        for(int i=0; i<n; i++){
-            cout<<rwHead[i]<<" ";
-        }
-        cout<<endl;
         
 
         int p = 1;

@@ -25,8 +25,8 @@ int main(){
         cin>>direction;
 
         int totalNoOfTrack = 0;
-        int sequence[n+2];
-        //sequence[0] = currentposition;
+        int sequence[n+3];
+        sequence[0] = currentposition;
 
         for(int i=0; i<n; i++){
             for(int j=0; j<n; j++){
@@ -53,14 +53,9 @@ int main(){
         if(direction=="right" || direction=="RIGHT" || direction=="R" || direction=="r"){
             flag = false;
         }
-
-        for(int i=0; i<n; i++){
-            cout<<rwHead[i]<<" ";
-        }
-        cout<<endl;
         
 
-        int p = 0;
+        int p = 1;
         if(flag){
             for(int i=minidx; i>=0; i--){
                 sequence[p++] = rwHead[i];
@@ -76,6 +71,11 @@ int main(){
                 sequence[p++] = rwHead[i];
                 totalNoOfTrack += abs(currentposition - rwHead[i]);
                 currentposition = rwHead[i];
+                if(i==n-1){
+                    sequence[p++] = m-1;
+                    totalNoOfTrack += abs(currentposition - (m-1));
+                    currentposition = m-1;                    
+                }
             }
         }
         else{
@@ -93,12 +93,17 @@ int main(){
                 sequence[p++] = rwHead[i];
                 totalNoOfTrack += abs(currentposition - rwHead[i]);
                 currentposition = rwHead[i];
+                if(i==0){
+                    sequence[p++] = 0;
+                    totalNoOfTrack += abs(currentposition - 0);
+                    currentposition = 0;
+                }
             }
         }
         
         cout<<"Total no of Track: "<<totalNoOfTrack<<endl;
         cout<<"Seek Sequence: "<<endl;
-        for(int i=0; i<n+1; i++){
+        for(int i=0; i<n+3; i++){
                 cout<<sequence[i]<<" ";
         }
         cout<<endl;
