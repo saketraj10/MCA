@@ -1,0 +1,7 @@
+Pipes
+1. Write a program using pipe to send a string from parent to child in order to print number of characters and digits in the string.
+2. Write a program using pipe to accept integer at parent and pass it to child. Child should check that number is Armstrong number or not and accordingly send a message - YES or NO to parent.
+3. Write a program using pipe to accept an array of integers at parent and pass it to child. Child will pick only even numbers and return array of even numbers to parent.
+4. Write a program using pipe to accept details of a student such as - RegNo, Mark1, Mark2, Mark3 and send it to child. Child will find average and accordingly assign Grades (A+, A, B, C, D, E, F- assume some criteria) and return grade to Parent.
+5. Write a program using pipe to accept a matrix on n X n and pass it to child. Child will multiply each element of user’s choice to each element return new matrix back to parent.
+6. Write a program using pipe to accept a string and pass it to child. Child will check the string whether it is palindrome or not. If palindrome then return message PALLINDROME otherwise NOT PALLINDROME to Parent.
