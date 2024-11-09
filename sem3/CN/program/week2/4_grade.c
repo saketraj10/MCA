@@ -76,7 +76,7 @@ int main() {
         else if (avg > 40)
             strcpy(grade, "E");
         else
-            strcpy(grade, "F-");
+            strcpy(grade, "F");
 
         // Send grade to parent
         write(fd2[1], grade, sizeof(grade));

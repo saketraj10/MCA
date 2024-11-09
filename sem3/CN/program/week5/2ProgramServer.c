@@ -11,7 +11,7 @@ void get_ip_class_and_mask(char *ip, char *ip_class, char *mask) {
     int first_octet;
     sscanf(ip, "%d", &first_octet);
 
-    if (first_octet >= 1 && first_octet <= 126) {
+    if (first_octet >= 0 && first_octet <= 127) {
         strcpy(ip_class, "A");
         strcpy(mask, "255.0.0.0");
     } else if (first_octet >= 128 && first_octet <= 191) {
